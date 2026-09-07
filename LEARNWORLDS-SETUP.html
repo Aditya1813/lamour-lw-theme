@@ -87,6 +87,14 @@
     <td>Avoid for active work — you'd have to tag a version per change.</td>
   </tr>
 </table>
+<div class="callout">
+  <p><strong>Verified 2026-09-07, not assumed.</strong> A real <code>*.github.io</code> stylesheet returns
+  <code>content-type: text/css</code>, <code>access-control-allow-origin: *</code> and
+  <code>cache-control: max-age=600</code> &mdash; so it loads cross-origin from LearnWorlds, and a change
+  is live within 10 minutes at worst (instantly if you bump <code>?v=</code>).
+  Fontshare returns <code>access-control-allow-origin: *</code> on both the CSS and the <code>.woff2</code>
+  files, which is what cross-origin font loading requires.</p>
+</div>
 <p class="muted">The existing <code>lamour-website</code> repo is private, so it can't serve these. Use a separate public repo — it contains only CSS and JS, no content and no keys.</p>
 
 <h3>Publishing it</h3>
@@ -94,7 +102,7 @@
 ./build.sh
 git init &amp;&amp; git add -A &amp;&amp; git commit -m "L'Amour LearnWorlds theme layer"
 gh repo create lamour-lw-theme --public --source=. --push
-gh api -X POST repos/:owner/lamour-lw-theme/pages \
+gh api -X POST repos/{owner}/lamour-lw-theme/pages \
   -f 'source[branch]=main' -f 'source[path]=/'</code></pre>
 <p>Your two URLs are then:</p>
 <pre><code>https://aditya1813.github.io/lamour-lw-theme/dist/lamour.css
@@ -110,7 +118,7 @@ https://aditya1813.github.io/lamour-lw-theme/dist/lamour.js</code></pre>
 &lt;script defer src="https://aditya1813.github.io/lamour-lw-theme/dist/lamour.js?v=1"&gt;&lt;/script&gt;</code></pre>
 
 <div class="callout">
-  <p><strong>The course player never receives the <code>&lt;head&gt;</code> slot.</strong> It is the one documented exception. To reach it, paste the same two <code>lamour.*</code> lines (the stylesheet and the script — the font lines too) into <code>&lt;body&gt; logged in</code> as well. Browsers honour a <code>&lt;link&gt;</code> in the body, and the duplicate on ordinary logged-in pages costs nothing: the file is already cached.</p>
+  <p><strong>The course player never receives the <code>&lt;head&gt;</code> slot.</strong> It is the one documented exception. To reach it, paste the same two <code>lamour.*</code> lines (the stylesheet and the script — the font lines too) into <code>&lt;body&gt; logged in</code> as well. <code>stylesheet</code> is one of the HTML spec's &ldquo;body-ok&rdquo; link types, so this is sanctioned, not a hack. The duplicate on ordinary logged-in pages costs nothing &mdash; the file is already cached.</p>
 </div>
 
 <h2><span class="n">03</span>Paste the forms stylesheet by hand</h2>
