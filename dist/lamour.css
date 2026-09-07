@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.09.07.1229
+/*! L'Amour LearnWorlds theme — build 2026.09.07.1231
     Source: ~/dev/lamour-lw-theme/src — edit there, never edit dist/.
     Design system of record: ~/dev/lamour-website/src/app/globals.css */
 
@@ -424,6 +424,26 @@ body.lw-page [class*="learnworlds-button-outline-"] {
     background-color: transparent !important;
     color: var(--la-fg, var(--la-ink)) !important;
   }
+}
+
+/* A menu item styled as a button carries only the VARIANT class
+   (learnworlds-button-outline-brand), never the base .learnworlds-button, so
+   it missed the button typography and rendered in sentence case beside
+   uppercase siblings. Matched via .button-like: a [class*="learnworlds-button-"]
+   match would also catch .learnworlds-button-wrapper, a layout div.
+   Typography only — the padding stays with LearnWorlds' menu sizing. */
+body.lw-page .lw-topbar-option-link.button-like,
+body.lw-page .lw-topbar-option-link.button-like .lw-topbar-option-link-lbl {
+  font-family: var(--la-font-sans) !important;
+  font-weight: 500 !important;
+  font-size: 0.6875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.14em !important;
+  text-decoration: none !important;
+}
+body.lw-page .lw-topbar-option-link.button-like {
+  border-radius: var(--la-radius) !important;
+  box-shadow: none !important;
 }
 
 /* ---- Inputs & forms ---------------------------------------------------- */

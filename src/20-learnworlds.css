@@ -180,6 +180,26 @@ body.lw-page [class*="learnworlds-button-outline-"] {
   }
 }
 
+/* A menu item styled as a button carries only the VARIANT class
+   (learnworlds-button-outline-brand), never the base .learnworlds-button, so
+   it missed the button typography and rendered in sentence case beside
+   uppercase siblings. Matched via .button-like: a [class*="learnworlds-button-"]
+   match would also catch .learnworlds-button-wrapper, a layout div.
+   Typography only — the padding stays with LearnWorlds' menu sizing. */
+body.lw-page .lw-topbar-option-link.button-like,
+body.lw-page .lw-topbar-option-link.button-like .lw-topbar-option-link-lbl {
+  font-family: var(--la-font-sans) !important;
+  font-weight: 500 !important;
+  font-size: 0.6875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.14em !important;
+  text-decoration: none !important;
+}
+body.lw-page .lw-topbar-option-link.button-like {
+  border-radius: var(--la-radius) !important;
+  box-shadow: none !important;
+}
+
 /* ---- Inputs & forms ---------------------------------------------------- */
 /* Boxed inputs read as a web form. A hairline underline reads as editorial
    stationery, which is the register the rest of the site is in. */
