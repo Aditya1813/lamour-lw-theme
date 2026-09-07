@@ -153,9 +153,9 @@ body.lw-page .learnworlds-button-solid-dark {
 }
 body.lw-page .learnworlds-button-solid-light,
 body.lw-page .learnworlds-button-solid-white {
-  background-color: var(--la-bg, var(--la-paper)) !important;
-  border-color: var(--la-bg, var(--la-paper)) !important;
-  color: var(--la-fg, var(--la-ink)) !important;
+  background-color: var(--la-fg, var(--la-ink)) !important;
+  border-color: var(--la-fg, var(--la-ink)) !important;
+  color: var(--la-bg, var(--la-paper)) !important;
 }
 
 /* Outline: hairline in the context's foreground, filling on hover. */
@@ -172,7 +172,9 @@ body.lw-page [class*="learnworlds-button-outline-"] {
   body.lw-page .learnworlds-button-solid-brand:hover,
   body.lw-page .learnworlds-button-solid-accent1:hover,
   body.lw-page .learnworlds-button-solid-accent2:hover,
-  body.lw-page .learnworlds-button-solid-dark:hover {
+  body.lw-page .learnworlds-button-solid-dark:hover,
+  body.lw-page .learnworlds-button-solid-light:hover,
+  body.lw-page .learnworlds-button-solid-white:hover {
     background-color: transparent !important;
     color: var(--la-fg, var(--la-ink)) !important;
   }
@@ -245,9 +247,13 @@ body.lw-page .learnworlds-divider {
    one hairline under the bar instead of a shadow. */
 
 body.lw-page .lw-topbar {
-  background-color: var(--la-paper) !important;
-  border-bottom: var(--la-hairline) solid var(--la-line-on-light);
+  background-color: transparent;
+  border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
   box-shadow: none !important;
+}
+/* Only claim the bar when the template hasn't already made it dark. */
+body.lw-page .lw-topbar:not(.lw-dark-bg):not(.lw-brand-bg) {
+  background-color: var(--la-paper);
 }
 body.lw-page .lw-topbar-option-link-lbl,
 body.lw-page .lw-topbar-option-link {
@@ -257,7 +263,7 @@ body.lw-page .lw-topbar-option-link {
   font-weight: 500 !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
-  color: var(--la-ink) !important;
+  color: var(--la-fg, var(--la-ink)) !important;
   transition: opacity 200ms var(--la-ease) !important;
 }
 @media (hover: hover) {
