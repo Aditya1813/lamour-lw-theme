@@ -48,7 +48,14 @@
 /* Surface contexts. Any block can be flipped light/dark by adding one class,
    and every child reads its ink/line/muted from the context rather than
    re-declaring colours. */
+/* LearnWorlds itself stamps lw-light-bg / lw-dark-bg onto a section according
+   to the background chosen in the builder, so picking a background there is
+   all it takes to flip a section's whole context. lw-light-bg must be listed
+   here or a light section nested inside a dark one keeps the dark tokens and
+   renders white-on-white. */
 .la-on-light,
+.lw-light-bg,
+.lw-body-bg,
 body.lw-page {
   --la-fg: var(--la-ink);
   --la-bg: var(--la-paper);
