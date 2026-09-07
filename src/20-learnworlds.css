@@ -249,8 +249,8 @@ body.lw-page .learnworlds-divider {
 body.lw-page .lw-topbar {
   box-shadow: none !important;   /* the bar is a hairline, never a shadow */
 }
-body.lw-page .lw-topbar-option-link-lbl,
-body.lw-page .lw-topbar-option-link {
+body.lw-page .lw-topbar-option-link:not(.button-like) .lw-topbar-option-link-lbl,
+body.lw-page .lw-topbar-option-link:not(.button-like) {
   text-decoration: none !important;
   font-family: var(--la-font-sans) !important;
   font-size: 0.75rem !important;
@@ -260,10 +260,16 @@ body.lw-page .lw-topbar-option-link {
   color: var(--la-fg, var(--la-ink)) !important;
   transition: opacity 200ms var(--la-ease) !important;
 }
-@media (hover: hover) {
-  body.lw-page .lw-topbar-option-link:hover { opacity: 0.55; }
+body.lw-page .lw-topbar-option-link.button-like .lw-topbar-option-link-lbl {
+  color: inherit !important;
+  text-decoration: none !important;
+  letter-spacing: inherit;
+  text-transform: inherit;
 }
-body.lw-page .lw-topbar-option-link:active { opacity: 0.6; }
+@media (hover: hover) {
+  body.lw-page .lw-topbar-option-link:not(.button-like):hover { opacity: 0.55; }
+}
+body.lw-page .lw-topbar-option-link:not(.button-like):active { opacity: 0.6; }
 /* The logo's square frame is never altered — only its box is spaced. */
 body.lw-page .lw-logo img { border-radius: 0 !important; }
 
