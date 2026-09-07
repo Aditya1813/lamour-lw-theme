@@ -28,6 +28,18 @@ mkdir -p dist
 } > dist/lamour.js
 
 cp src/50-dynamic-slot.css dist/lamour-dynamic-slot.css
+
+# The exact block to paste into the LearnWorlds head/body slots, stamped with
+# this build so the cache-buster is never copied stale. Copy it with:
+#   pbcopy < dist/paste-into-learnworlds.html
+BASE="https://aditya1813.github.io/lamour-lw-theme/dist"
+cat > dist/paste-into-learnworlds.html <<EOF
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=sentient@300i,500i&f%5B%5D=general-sans@200,300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="$BASE/lamour.css?v=$VERSION">
+<script defer src="$BASE/lamour.js?v=$VERSION"></script>
+EOF
 echo "$VERSION" > dist/VERSION
 
 printf 'built dist/lamour.css  %s bytes (%s gzipped)\n' \
