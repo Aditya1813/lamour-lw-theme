@@ -64,6 +64,12 @@
   <p><strong>The idea in one line.</strong> LearnWorlds holds four lines of code. Everything else lives in <code>~/dev/lamour-lw-theme</code>, in git — so a design change is <code>./build.sh</code> and a push, not a copy-paste into a text box in a web app.</p>
 </div>
 
+<div class="callout">
+  <p><strong>Steps 01&ndash;04 are already done</strong> (7 Sep 2026). The repo is
+  <a href="https://github.com/Aditya1813/lamour-lw-theme">Aditya1813/lamour-lw-theme</a>, Pages is on, and both
+  files verified live with <code>text/css</code> + <code>access-control-allow-origin: *</code>.
+  Start at step 02 &mdash; the paste &mdash; and keep 01 for reference.</p>
+</div>
 <h2><span class="n">01</span>Pick where the files are hosted</h2>
 <p>LearnWorlds will load two files by URL. They need to sit somewhere public with permissive CORS. Three realistic options:</p>
 <table>
@@ -114,8 +120,8 @@ https://aditya1813.github.io/lamour-lw-theme/dist/lamour.js</code></pre>
 <pre><code>&lt;link rel="preconnect" href="https://api.fontshare.com" crossorigin&gt;
 &lt;link rel="preconnect" href="https://cdn.fontshare.com" crossorigin&gt;
 &lt;link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=sentient@300i,500i&amp;f%5B%5D=general-sans@200,300,400,500,600,700&amp;display=swap"&gt;
-&lt;link rel="stylesheet" href="https://aditya1813.github.io/lamour-lw-theme/dist/lamour.css?v=1"&gt;
-&lt;script defer src="https://aditya1813.github.io/lamour-lw-theme/dist/lamour.js?v=1"&gt;&lt;/script&gt;</code></pre>
+&lt;link rel="stylesheet" href="https://aditya1813.github.io/lamour-lw-theme/dist/lamour.css?v=2026.09.07.1231"&gt;
+&lt;script defer src="https://aditya1813.github.io/lamour-lw-theme/dist/lamour.js?v=2026.09.07.1231"&gt;&lt;/script&gt;</code></pre>
 
 <div class="callout">
   <p><strong>The course player never receives the <code>&lt;head&gt;</code> slot.</strong> It is the one documented exception. To reach it, paste the same two <code>lamour.*</code> lines (the stylesheet and the script — the font lines too) into <code>&lt;body&gt; logged in</code> as well. <code>stylesheet</code> is one of the HTML spec's &ldquo;body-ok&rdquo; link types, so this is sanctioned, not a hack. The duplicate on ordinary logged-in pages costs nothing &mdash; the file is already cached.</p>
