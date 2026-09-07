@@ -1,0 +1,79 @@
+/* =========================================================================
+   40-builtin.css — LearnWorlds' built-in pages and the course player.
+
+   Built-in pages (social, profile, workpad, account, dailynews, people,
+   inbox) can't be edited in the builder; they're only reachable through
+   custom code. LearnWorlds puts a `slug-{slug}` class on <body>, which is
+   the hook every rule below uses.
+
+   The course player is the one page that never receives the <head> slot, so
+   this file only reaches it if the stylesheet <link> is ALSO placed in the
+   `<body> logged in` slot. See LEARNWORLDS-SETUP.html step 3.
+   ========================================================================= */
+
+/* ---- Shared chrome across every built-in page --------------------------- */
+body.slug-social,
+body.slug-profile,
+body.slug-workpad,
+body.slug-account,
+body.slug-dailynews,
+body.slug-people,
+body.slug-inbox {
+  font-family: var(--la-font-sans) !important;
+  background: var(--la-paper);
+  color: var(--la-ink);
+}
+
+body[class*="slug-"] h1,
+body[class*="slug-"] h2,
+body[class*="slug-"] h3 {
+  font-family: var(--la-font-display) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.018em;
+}
+
+/* Every panel/card on these pages: kill the rounded, shadowed look and
+   replace it with a hairline. */
+body[class*="slug-"] .panel,
+body[class*="slug-"] [class*="-card"],
+body[class*="slug-"] [class*="-box"] {
+  border-radius: var(--la-radius) !important;
+  box-shadow: none !important;
+  border: var(--la-hairline) solid var(--la-line-on-light) !important;
+}
+
+/* ---- Account -------------------------------------------------------- */
+body.slug-account #coursesTaken { background-color: var(--la-paper); }
+
+/* ---- Workpad: full width, the default column is far too narrow -------- */
+body.slug-workpad #workpadWrapper { width: 100% !important; max-width: var(--la-content-max); margin-inline: auto; }
+
+/* ---- People / profile ------------------------------------------------ */
+body.slug-people .profile-card,
+body.slug-profile .profile-card { border-radius: 0 !important; }
+body[class*="slug-"] .profile-avatar { border-radius: 50% !important; }  /* faces stay round */
+
+/* ---- Course player ---------------------------------------------------- */
+/* The player is a reading surface, not a marketing page: type gets a real
+   measure and the chrome recedes. Kept conservative on purpose — breaking
+   the player breaks the product. */
+.lw-course-player,
+#courseplayer,
+body.course-player {
+  font-family: var(--la-font-sans) !important;
+}
+.lw-course-player h1,
+.lw-course-player h2,
+.lw-course-player h3 {
+  font-family: var(--la-font-display) !important;
+  font-style: italic !important;
+}
+
+/* ---- Sign in / sign up forms ------------------------------------------
+   These render through LearnWorlds' Dynamic CSS slot rather than the page
+   slots, so this block must ALSO be pasted into
+   Site custom code → <style> Dynamic (css). It is duplicated here so the
+   preview harness renders it too. */
+.-form-create-forgot .learnworlds-main-text-very-small { font-size: 0.8125rem; letter-spacing: 0.01em; }
+.-form-create-forgot .-login-small-but { padding-right: 10px; }

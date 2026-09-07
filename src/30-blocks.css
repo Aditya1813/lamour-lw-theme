@@ -1,0 +1,207 @@
+/* =========================================================================
+   30-blocks.css — the paste-in block library.
+
+   These styles exist for the handful of layouts LearnWorlds' native widgets
+   genuinely cannot make (a counted stats strip, a numbered journey spine, a
+   full-bleed pull quote). Everything else should be built with the native
+   builder so it stays editable by non-developers.
+
+   Every block is self-contained, uses only tokens, and is prefixed `la-`.
+   Markup for each lives in ../blocks/*.html — paste it into a LearnWorlds
+   HTML widget or the page's <body> custom-code slot.
+   ========================================================================= */
+
+.la-block {
+  padding-block: var(--la-section-y);
+  padding-inline: var(--la-gutter);
+  background: var(--la-bg, var(--la-paper));
+  color: var(--la-fg, var(--la-ink));
+}
+.la-inner { max-width: var(--la-content-max); margin-inline: auto; }
+.la-inner--narrow { max-width: 900px; }
+
+/* Section head: eyebrow, headline, optional lead. Used by most blocks. */
+.la-head { display: grid; gap: 1rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+.la-head .la-body { margin: 0; }
+
+/* ---- 1. Hero ----------------------------------------------------------- */
+/* Full-bleed photograph, ink veil, headline sitting on the lower third.
+   min-height uses svh so mobile browser chrome doesn't crop the headline. */
+.la-hero {
+  position: relative;
+  min-height: min(92svh, 900px);
+  display: flex;
+  align-items: flex-end;
+  padding: 0;
+  overflow: hidden;
+  background: var(--la-ink);
+}
+.la-hero__media {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.04);
+  transition: transform 1600ms var(--la-ease);
+}
+.la-hero.is-revealed .la-hero__media { transform: scale(1); }
+.la-hero__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(11 11 10 / 72%) 0%, rgb(11 11 10 / 24%) 48%, rgb(11 11 10 / 10%) 100%);
+}
+.la-hero__body {
+  position: relative;
+  width: 100%;
+  max-width: var(--la-content-max);
+  margin-inline: auto;
+  padding: var(--la-gutter);
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+  display: grid;
+  gap: 1.5rem;
+}
+.la-hero__body .la-body { color: var(--la-muted-on-dark); }
+
+/* ---- 2. Stats strip ---------------------------------------------------- */
+/* Numbers count up once, on entry, via lamour.js. The hairline between
+   figures replaces a card border. */
+.la-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  border-top: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
+}
+.la-stat {
+  padding: clamp(1.75rem, 3vw, 2.75rem) 0;
+  border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
+  display: grid;
+  gap: 0.5rem;
+}
+@media (width >= 48rem) {
+  .la-stat + .la-stat { border-left: var(--la-hairline) solid var(--la-line, var(--la-line-on-light)); padding-left: clamp(1.5rem, 3vw, 3rem); }
+}
+.la-stat__figure {
+  font-family: var(--la-font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.028em;
+  font-variant-numeric: tabular-nums;   /* stops the layout jittering mid-count */
+}
+.la-stat__label { color: var(--la-muted, var(--la-muted-on-light)); font-size: 0.875rem; line-height: 1.45; max-width: 22ch; }
+
+/* ---- 3. Journey spine -------------------------------------------------- */
+/* A numbered vertical sequence — enrol → train → assess → certify → work.
+   The spine is one hairline; steps hang off it. */
+.la-spine { display: grid; gap: 0; border-top: var(--la-hairline) solid var(--la-line, var(--la-line-on-light)); }
+.la-step {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding-block: clamp(1.75rem, 3.5vw, 3rem);
+  border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
+}
+@media (width >= 64rem) { .la-step { grid-template-columns: 6rem minmax(0, 22ch) 1fr; } }
+.la-step__n {
+  font-family: var(--la-font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--la-muted, var(--la-muted-on-light));
+  padding-top: 0.55em;
+}
+.la-step__title { font-family: var(--la-font-display); font-style: italic; font-size: clamp(1.35rem, 2.4vw, 1.875rem); line-height: 1.18; letter-spacing: -0.012em; }
+.la-step__body { color: var(--la-muted, var(--la-muted-on-light)); line-height: 1.65; max-width: var(--la-measure); }
+@media (width < 64rem) { .la-step__body { grid-column: 2; } }
+
+/* ---- 4. Pull quote ----------------------------------------------------- */
+.la-quote { text-align: left; }
+.la-quote blockquote {
+  margin: 0;
+  font-family: var(--la-font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  line-height: 1.24;
+  letter-spacing: -0.018em;
+  max-width: 24ch;
+}
+.la-quote figcaption { margin-top: 2rem; display: grid; gap: 0.25rem; }
+.la-quote cite { font-style: normal; font-size: 0.875rem; font-weight: 500; }
+.la-quote .la-quote__role { font-size: 0.8125rem; color: var(--la-muted, var(--la-muted-on-light)); }
+
+/* ---- 5. Editorial split ------------------------------------------------ */
+/* Image one side, text the other. Alternates with `.la-split--flip`. */
+.la-split { display: grid; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+@media (width >= 64rem) {
+  .la-split { grid-template-columns: 1fr 1fr; }
+  .la-split--flip .la-split__media { order: 2; }
+}
+.la-split__media { aspect-ratio: 4 / 5; background-size: cover; background-position: center; background-color: var(--la-stone); }
+.la-split__body { display: grid; gap: 1.25rem; }
+
+/* ---- 6. CTA band ------------------------------------------------------- */
+.la-cta { background: var(--la-ink); color: var(--la-paper); --la-fg: var(--la-paper); --la-bg: var(--la-ink); --la-muted: var(--la-muted-on-dark); --la-line: var(--la-line-on-dark); }
+.la-cta__inner { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
+@media (width >= 64rem) { .la-cta__inner { grid-template-columns: 1fr auto; align-items: end; } }
+
+/* ---- 7. Accreditation strip -------------------------------------------- */
+/* Text-only by rule: no third-party logos are used anywhere on this site,
+   and approval wording is quoted exactly as approved — never paraphrased. */
+.la-accred {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 4vw, 3.5rem);
+  align-items: center;
+  justify-content: center;
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  border-block: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
+}
+.la-accred span { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--la-muted, var(--la-muted-on-light)); }
+
+/* ---- 8. Course index --------------------------------------------------- */
+/* A hairline list, not a card deck. Reads like a prospectus contents page. */
+.la-index { border-top: var(--la-hairline) solid var(--la-line, var(--la-line-on-light)); }
+.la-index__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem clamp(1rem, 3vw, 3rem);
+  align-items: baseline;
+  padding-block: clamp(1.25rem, 2.5vw, 2rem);
+  border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
+  text-decoration: none;
+  color: inherit;
+}
+@media (width >= 64rem) { .la-index__row { grid-template-columns: 10rem 1fr 12rem auto; } }
+.la-index__cat { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--la-muted, var(--la-muted-on-light)); }
+.la-index__name { font-family: var(--la-font-display); font-style: italic; font-size: clamp(1.25rem, 2vw, 1.625rem); letter-spacing: -0.012em; line-height: 1.2; }
+.la-index__meta { font-size: 0.875rem; color: var(--la-muted, var(--la-muted-on-light)); }
+.la-index__go { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap; }
+@media (hover: hover) {
+  .la-index__row { transition: background-color var(--la-dur) var(--la-ease), padding-inline var(--la-dur) var(--la-ease); }
+  .la-index__row:hover { background: var(--la-stone); padding-inline: 1rem; }
+}
+
+/* ---- Shared: button in block markup ------------------------------------ */
+.la-btn {
+  display: inline-block;
+  font-family: var(--la-font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.95rem 2rem;
+  border: var(--la-hairline) solid var(--la-fg, var(--la-ink));
+  background: var(--la-fg, var(--la-ink));
+  color: var(--la-bg, var(--la-paper));
+  border-radius: var(--la-radius);
+  touch-action: manipulation;
+  transition: background-color var(--la-dur) var(--la-ease), color var(--la-dur) var(--la-ease), transform 220ms var(--la-ease);
+}
+.la-btn--ghost { background: transparent; color: var(--la-fg, var(--la-ink)); }
+.la-btn:active { transform: scale(0.97); transition-duration: 100ms; }
+@media (hover: hover) {
+  .la-btn:hover { background: transparent; color: var(--la-fg, var(--la-ink)); }
+  .la-btn--ghost:hover { background: var(--la-fg, var(--la-ink)); color: var(--la-bg, var(--la-paper)); }
+}

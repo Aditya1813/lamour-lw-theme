@@ -1,0 +1,38 @@
+/* =========================================================================
+   50-dynamic-slot.css — PASTE THIS ONE BY HAND.
+
+   Site custom code → <style> Dynamic (css)
+
+   LearnWorlds renders sign-in / sign-up / checkout forms through a separate
+   dynamic style slot that the site <head> stylesheet does not reach. It is a
+   short file on purpose: only what those forms need.
+   ========================================================================= */
+
+.learnworlds-input,
+.lw-form input[type="text"],
+.lw-form input[type="email"],
+.lw-form input[type="password"] {
+  font-family: "General Sans", sans-serif !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgb(11 11 10 / 12%) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+}
+.learnworlds-input:focus { border-bottom-color: #0b0b0a !important; outline: none !important; }
+
+.learnworlds-button {
+  font-family: "General Sans", sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.14em !important;
+  border-radius: 0 !important;
+}
+.learnworlds-button-solid-brand {
+  background-color: #0b0b0a !important;
+  border-color: #0b0b0a !important;
+  color: #ffffff !important;
+}
+
+.-form-create-forgot .learnworlds-main-text-very-small { font-size: 0.8125rem; letter-spacing: 0.01em; }
+.-form-create-forgot .-login-small-but { padding-right: 10px; }

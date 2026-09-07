@@ -1,0 +1,329 @@
+/* =========================================================================
+   20-learnworlds.css — re-skin of LearnWorlds' own widgets.
+
+   This is the layer that does the real work. Every selector below targets a
+   class LearnWorlds itself emits (verified against the rendered HTML of
+   lamour.learnworlds.com, site builder v4.162.x), so pages built with the
+   NATIVE page builder inherit the design system automatically. You should
+   almost never need to hand-write a section: drop in LearnWorlds' own
+   heading/text/button/image widgets and they come out on-brand.
+
+   !important appears deliberately and only where the Theme Explorer writes
+   inline styles onto the element — those cannot be beaten any other way.
+   ========================================================================= */
+
+/* ---- Sections & rhythm ------------------------------------------------- */
+
+body.lw-page .learnworlds-section {
+  padding-top: var(--la-section-y);
+  padding-bottom: var(--la-section-y);
+  background-color: var(--la-bg, var(--la-paper));
+  color: var(--la-fg, var(--la-ink));
+}
+
+/* Full-bleed photography sections keep their image and lose the padding —
+   the picture is the section. */
+body.lw-page .learnworlds-section.stretched-bg.la-bleed { padding: 0; }
+
+body.lw-page .learnworlds-section-content {
+  max-width: var(--la-content-max);
+  padding-left: var(--la-gutter);
+  padding-right: var(--la-gutter);
+  margin-inline: auto;
+}
+body.lw-page .learnworlds-section-content.wide { max-width: 100%; }
+
+/* Alternating warm neutral. Add class `la-stone` to any section in the
+   builder's section settings to get the stone band instead of paper. */
+body.lw-page .learnworlds-section.la-stone {
+  background-color: var(--la-stone);
+  --la-fg: var(--la-ink);
+  --la-bg: var(--la-stone);
+}
+body.lw-page .learnworlds-section.la-ink {
+  background-color: var(--la-ink);
+  --la-fg: var(--la-paper);
+  --la-bg: var(--la-ink);
+  --la-line: var(--la-line-on-dark);
+  --la-muted: var(--la-muted-on-dark);
+  color: var(--la-paper);
+}
+
+/* Overlay on photographic sections: a flat ink veil, never a brand-colour
+   wash. Colour comes from the photograph. */
+body.lw-page .learnworlds-section-overlay.lw-dark-bg,
+body.lw-page .lw-brand-bg-fadeout60 {
+  background-color: rgb(11 11 10 / 46%) !important;
+}
+
+/* ---- Brand colour classes remapped to monochrome ----------------------- */
+/* LearnWorlds themes ship an accent palette. The design system has none, so
+   every accent surface collapses onto ink and every accent text onto ink. */
+body.lw-page .lw-brand-bg,
+body.lw-page .lw-brand-accent1-bg,
+body.lw-page .lw-brand-accent2-bg { background-color: var(--la-ink) !important; }
+
+body.lw-page .lw-brand-text        { color: currentColor !important; }
+body.lw-page .lw-light-bg          { background-color: var(--la-stone) !important; }
+body.lw-page .lw-light-text        { color: var(--la-paper) !important; }
+body.lw-page .lw-text-color-fadeout20 { color: var(--la-muted, var(--la-muted-on-light)) !important; }
+body.lw-page .lw-text-color-fadeout50 { color: var(--la-muted, var(--la-muted-on-light)) !important; }
+
+/* ---- Headings ---------------------------------------------------------- */
+/* h1/h2 = .learnworlds-heading, h3 = .learnworlds-heading3, h4 = -heading4.
+   All three become Sentient italic; only the size class changes the optics. */
+
+body.lw-page .learnworlds-heading,
+body.lw-page .learnworlds-heading3,
+body.lw-page .learnworlds-heading4 {
+  font-family: var(--la-font-display) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  color: var(--la-fg, var(--la-ink));
+  text-wrap: balance;
+  text-transform: none !important;
+}
+
+body.lw-page .learnworlds-heading-large    { font-size: clamp(2.75rem, 7vw, 5.5rem)   !important; letter-spacing: -0.032em; line-height: 1.04; }
+body.lw-page .learnworlds-heading-normal   { font-size: clamp(2.25rem, 5.2vw, 4rem)   !important; letter-spacing: -0.028em; line-height: 1.06; }
+body.lw-page .learnworlds-heading-small    { font-size: clamp(2rem, 4.2vw, 3.25rem)   !important; letter-spacing: -0.024em; line-height: 1.09; }
+body.lw-page .learnworlds-heading3-large   { font-size: clamp(1.85rem, 3.6vw, 2.75rem)!important; letter-spacing: -0.02em;  line-height: 1.11; }
+body.lw-page .learnworlds-heading3-normal  { font-size: clamp(1.65rem, 3.2vw, 2.5rem) !important; letter-spacing: -0.018em; line-height: 1.13; }
+body.lw-page .learnworlds-heading3-small   { font-size: clamp(1.35rem, 2.4vw, 1.875rem)!important;letter-spacing: -0.012em; line-height: 1.18; }
+body.lw-page .learnworlds-heading4-large   { font-size: clamp(1.25rem, 2vw, 1.5rem)   !important; letter-spacing: -0.008em; line-height: 1.22; }
+body.lw-page .learnworlds-heading4-normal  { font-size: clamp(1.125rem, 1.6vw, 1.25rem)!important;letter-spacing: -0.004em; line-height: 1.28; }
+body.lw-page .learnworlds-heading4-small   { font-size: 1rem !important; letter-spacing: 0.005em; line-height: 1.4; }
+
+/* ---- Body text --------------------------------------------------------- */
+
+body.lw-page .learnworlds-main-text {
+  font-family: var(--la-font-sans) !important;
+  color: var(--la-muted, var(--la-muted-on-light));
+  letter-spacing: 0;
+  text-wrap: pretty;
+}
+body.lw-page .learnworlds-main-text-huge       { font-size: clamp(1.375rem, 2.4vw, 1.75rem) !important; line-height: 1.5; color: var(--la-fg, var(--la-ink)); }
+body.lw-page .learnworlds-main-text-large      { font-size: clamp(1.125rem, 1.5vw, 1.375rem)!important; line-height: 1.55; color: var(--la-fg, var(--la-ink)); }
+body.lw-page .learnworlds-main-text-normal     { font-size: clamp(1rem, 1.05vw, 1.125rem)   !important; line-height: 1.65; }
+body.lw-page .learnworlds-main-text-small      { font-size: 0.9375rem !important; line-height: 1.6; }
+body.lw-page .learnworlds-main-text-very-small { font-size: 0.8125rem !important; line-height: 1.55; letter-spacing: 0.01em; }
+
+/* Body copy inside a text column gets a measure. Widgets sitting alone in a
+   full-width column would otherwise run 140 characters on a desktop. */
+body.lw-page .col > .learnworlds-main-text { max-width: var(--la-measure); }
+body.lw-page .learnworlds-align-center .learnworlds-main-text { margin-inline: auto; }
+
+/* ---- Buttons ----------------------------------------------------------- */
+/* Every LearnWorlds button variant collapses to two real buttons: a solid
+   ink one and a hairline outline one. Uppercase, tracked, square. */
+
+body.lw-page .learnworlds-button {
+  font-family: var(--la-font-sans) !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.14em !important;
+  text-decoration: none !important;
+  border-radius: var(--la-radius) !important;
+  border-width: var(--la-hairline) !important;
+  border-style: solid !important;
+  box-shadow: none !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 220ms var(--la-ease),
+    background-color var(--la-dur) var(--la-ease),
+    color var(--la-dur) var(--la-ease),
+    border-color var(--la-dur) var(--la-ease) !important;
+}
+body.lw-page .learnworlds-button:active { transform: scale(0.97); transition-duration: 100ms; }
+
+body.lw-page .learnworlds-button-large  { font-size: 0.8125rem !important; padding: 1.15rem 2.5rem !important; }
+body.lw-page .learnworlds-button-normal { font-size: 0.75rem   !important; padding: 0.95rem 2rem   !important; }
+body.lw-page .learnworlds-button-small  { font-size: 0.6875rem !important; padding: 0.75rem 1.5rem !important; }
+
+/* Solid: ink on light surfaces, paper on dark ones — driven by the context
+   tokens, so the same class is correct in both places. */
+body.lw-page .learnworlds-button-solid-brand,
+body.lw-page .learnworlds-button-solid-accent1,
+body.lw-page .learnworlds-button-solid-accent2,
+body.lw-page .learnworlds-button-solid-dark {
+  background-color: var(--la-fg, var(--la-ink)) !important;
+  border-color: var(--la-fg, var(--la-ink)) !important;
+  color: var(--la-bg, var(--la-paper)) !important;
+}
+body.lw-page .learnworlds-button-solid-light,
+body.lw-page .learnworlds-button-solid-white {
+  background-color: var(--la-bg, var(--la-paper)) !important;
+  border-color: var(--la-bg, var(--la-paper)) !important;
+  color: var(--la-fg, var(--la-ink)) !important;
+}
+
+/* Outline: hairline in the context's foreground, filling on hover. */
+body.lw-page [class*="learnworlds-button-outline-"] {
+  background-color: transparent !important;
+  border-color: var(--la-fg, var(--la-ink)) !important;
+  color: var(--la-fg, var(--la-ink)) !important;
+}
+@media (hover: hover) {
+  body.lw-page [class*="learnworlds-button-outline-"]:hover {
+    background-color: var(--la-fg, var(--la-ink)) !important;
+    color: var(--la-bg, var(--la-paper)) !important;
+  }
+  body.lw-page .learnworlds-button-solid-brand:hover,
+  body.lw-page .learnworlds-button-solid-accent1:hover,
+  body.lw-page .learnworlds-button-solid-accent2:hover,
+  body.lw-page .learnworlds-button-solid-dark:hover {
+    background-color: transparent !important;
+    color: var(--la-fg, var(--la-ink)) !important;
+  }
+}
+
+/* ---- Inputs & forms ---------------------------------------------------- */
+/* Boxed inputs read as a web form. A hairline underline reads as editorial
+   stationery, which is the register the rest of the site is in. */
+
+body.lw-page .learnworlds-input {
+  font-family: var(--la-font-sans) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light)) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  color: var(--la-fg, var(--la-ink)) !important;
+  transition: border-color var(--la-dur) var(--la-ease) !important;
+}
+body.lw-page .learnworlds-input:focus {
+  border-bottom-color: var(--la-fg, var(--la-ink)) !important;
+  outline: none !important;
+}
+body.lw-page .learnworlds-input::placeholder {
+  color: var(--la-muted, var(--la-muted-on-light)) !important;
+  letter-spacing: 0.01em;
+}
+/* Radios and checkboxes keep their shape but lose the accent colour. */
+body.lw-page .learnworlds-input-radio-circle,
+body.lw-page .learnworlds-custom-radio-lbl { accent-color: var(--la-ink); }
+body.lw-page .lw-field-required-asterisk { color: var(--la-muted-on-light) !important; }
+
+/* ---- Images & frames --------------------------------------------------- */
+/* No rounded corners, no drop shadows. The photograph's own edge is the
+   edge. Aspect-ratio frames are kept — they are how the builder crops. */
+
+body.lw-page .learnworlds-framed-image,
+body.lw-page .learnworlds-image,
+body.lw-page [class*="learnworlds-frame-"],
+body.lw-page .lw-screen-content {
+  border-radius: var(--la-radius) !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+body.lw-page .learnworlds-screen-caption {
+  font-family: var(--la-font-sans) !important;
+  letter-spacing: 0.01em;
+}
+
+/* A slow scale on hover is the only motion photography gets. */
+@media (hover: hover) {
+  body.lw-page .js-screen-image-wrapper {
+    transition: transform 900ms var(--la-ease);
+  }
+  body.lw-page .lw-screen-content:hover .js-screen-image-wrapper { transform: scale(1.03); }
+}
+
+/* ---- Dividers ---------------------------------------------------------- */
+body.lw-page .learnworlds-divider {
+  border-top-width: var(--la-hairline) !important;
+  border-color: var(--la-line, var(--la-line-on-light)) !important;
+  opacity: 1 !important;
+}
+
+/* ---- Top bar (site nav) ------------------------------------------------ */
+/* Reference is apple.com's global nav: a persistent, quiet horizontal bar
+   that never competes with the page. Small tracked labels, no pill buttons,
+   one hairline under the bar instead of a shadow. */
+
+body.lw-page .lw-topbar {
+  background-color: var(--la-paper) !important;
+  border-bottom: var(--la-hairline) solid var(--la-line-on-light);
+  box-shadow: none !important;
+}
+body.lw-page .lw-topbar-option-link-lbl,
+body.lw-page .lw-topbar-option-link {
+  text-decoration: none !important;
+  font-family: var(--la-font-sans) !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--la-ink) !important;
+  transition: opacity 200ms var(--la-ease) !important;
+}
+@media (hover: hover) {
+  body.lw-page .lw-topbar-option-link:hover { opacity: 0.55; }
+}
+body.lw-page .lw-topbar-option-link:active { opacity: 0.6; }
+/* The logo's square frame is never altered — only its box is spaced. */
+body.lw-page .lw-logo img { border-radius: 0 !important; }
+
+/* ---- Footer ------------------------------------------------------------ */
+body.lw-page .lw-footer {
+  background-color: var(--la-ink) !important;
+  color: var(--la-paper);
+  --la-fg: var(--la-paper);
+  --la-bg: var(--la-ink);
+  --la-line: var(--la-line-on-dark);
+  --la-muted: var(--la-muted-on-dark);
+  padding-top: var(--la-section-y);
+  padding-bottom: calc(var(--la-section-y) / 2);
+}
+body.lw-page .lw-footer a,
+body.lw-page .lw-footer-links a {
+  color: var(--la-muted-on-dark) !important;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color var(--la-dur) var(--la-ease);
+}
+@media (hover: hover) {
+  body.lw-page .lw-footer a:hover { color: var(--la-paper) !important; }
+}
+body.lw-page .footer-col + .footer-col { border-left: 0; }
+body.lw-page .lw-social-button {
+  background: transparent !important;
+  border: var(--la-hairline) solid var(--la-line-on-dark) !important;
+  border-radius: 0 !important;
+  color: var(--la-paper) !important;
+}
+
+/* ---- Course cards ------------------------------------------------------ */
+/* `cards-grandpa` is the grid wrapper LearnWorlds emits for course lists.
+   Cards lose their chrome and become a hairline index entry: image, title,
+   one meta line. Grid, not carousel — the catalog pattern the redesign
+   settled on (som.com / gluckplus.com index behaviour). */
+
+body.lw-page .cards-grandpa {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+body.lw-page .cards-grandpa > * { width: 100% !important; margin: 0 !important; }
+
+body.lw-page [class*="course-card"],
+body.lw-page .cards-grandpa .learnworlds-element {
+  border-radius: var(--la-radius) !important;
+  box-shadow: none !important;
+}
+body.lw-page [class*="course-card"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: var(--la-hairline) solid var(--la-line-on-light) !important;
+  padding-top: 1.25rem !important;
+}
+
+/* ---- Progress ---------------------------------------------------------- */
+body.lw-page .lw-progress-wrapper { background: var(--la-line-on-light) !important; border-radius: 0 !important; }
+body.lw-page .lw-progress { background: var(--la-ink) !important; border-radius: 0 !important; }
+
+/* ---- Load more / pagination -------------------------------------------- */
+body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.75rem; }

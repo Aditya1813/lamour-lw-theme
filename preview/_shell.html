@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'Amour × LearnWorlds — theme preview</title>
+<!--
+  LOCAL PREVIEW HARNESS. Not deployed anywhere.
+
+  It reproduces the DOM LearnWorlds actually emits (verified against the
+  rendered HTML of lamour.learnworlds.com) so the override layer can be
+  checked without publishing to the live school. The left column is native
+  LearnWorlds widgets; below that is the paste-in block library.
+
+  Open with:  open ~/dev/lamour-lw-theme/preview/index.html
+  Rebuild with: ./build.sh   (this file is generated — edit _shell.html)
+-->
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=sentient@300i,500i&f%5B%5D=general-sans@200,300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="../dist/lamour.css">
+<style>
+  /* Harness chrome only — never ships. */
+  .harness-label {
+    position: sticky; top: 0; z-index: 50;
+    background: #0b0b0a; color: #fff;
+    font: 500 11px/1 ui-monospace, monospace; letter-spacing: .14em;
+    text-transform: uppercase; padding: 10px 16px;
+  }
+  /* LearnWorlds' own column grid, reproduced minimally so the harness lays
+     out like the real builder does. Ships with LearnWorlds, not with us. */
+  .lw-cols { display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 4vw, 4rem); }
+  .lw-cols > .col { flex: 1 1 100%; min-width: 0; }
+  @media (width >= 64rem) {
+    .col.span_7_of_12 { flex: 0 0 calc(58.333% - 2rem); }
+    .col.span_5_of_12 { flex: 0 0 calc(41.667% - 2rem); }
+  }
+  .swatches { display: flex; flex-wrap: wrap; gap: 12px; }
+  .swatch { width: 88px; }
+  .swatch i { display: block; height: 56px; border: 1px solid rgb(11 11 10 / 12%); }
+  .swatch b { display: block; font: 500 10px/1.6 ui-monospace, monospace; margin-top: 6px; }
+</style>
+</head>
+<body class="lw-page slug-home active-sitetemplate" style="--font-family-main-text: Nunito">
+
+<!-- ===== Simulated LearnWorlds top bar ===== -->
+<div class="lw-topbar">
+  <div class="lw-h-row" style="display:flex;align-items:center;justify-content:space-between;padding:18px 4vw;">
+    <div class="lw-topbar-logo-col"><strong style="font-family:var(--la-font-display);font-style:italic;font-size:20px;">L'Amour</strong></div>
+    <nav class="lw-topbar-menu">
+      <ul class="lw-topbar-options" style="display:flex;gap:28px;list-style:none;margin:0;padding:0;">
+        <li class="lw-topbar-option"><a class="lw-topbar-option-link" href="#"><span class="lw-topbar-option-link-lbl">Courses</span></a></li>
+        <li class="lw-topbar-option"><a class="lw-topbar-option-link" href="#"><span class="lw-topbar-option-link-lbl">About</span></a></li>
+        <li class="lw-topbar-option"><a class="lw-topbar-option-link" href="#"><span class="lw-topbar-option-link-lbl">Trainers</span></a></li>
+        <li class="lw-topbar-option"><a class="lw-topbar-option-link" href="#"><span class="lw-topbar-option-link-lbl">Contact</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="harness-label">A · Native LearnWorlds widgets, restyled by the override layer</div>
+
+<!-- ===== Native widget section ===== -->
+<section class="js-learnworlds-section learnworlds-section learnworlds-align-left" id="section_preview_1">
+  <div class="learnworlds-section-content js-learnworlds-section-content">
+    <div class="lw-cols one-row" data-node-type="columnWrapper">
+      <div class="col span_7_of_12 flex-item">
+        <h1 class="lw-widget-in learnworlds-heading learnworlds-element learnworlds-heading-large">Welcome to L'Amour Institute of Beauty</h1>
+        <div class="lw-widget-in learnworlds-main-text learnworlds-main-text-large learnworlds-element">A heading widget and a main-text widget, untouched from the builder — the stylesheet does the rest.</div>
+        <div class="lw-widget-in learnworlds-main-text learnworlds-main-text-normal learnworlds-element">Normal body text. Notice the measure: this paragraph stops at a comfortable line length instead of running the full column width, which is what the builder does by default on a wide desktop.</div>
+        <div class="learnworlds-button-wrapper" style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="learnworlds-button learnworlds-button-normal learnworlds-button-solid-brand" href="#">Enrol now</a>
+          <a class="learnworlds-button learnworlds-button-normal learnworlds-button-outline-brand" href="#">Download syllabus</a>
+        </div>
+      </div>
+      <div class="col span_5_of_12 flex-item">
+        <div class="lw-screen-content" style="margin-top:8px;">
+          <div class="learnworlds-AR-16-9 js-screen-image-wrapper" style="aspect-ratio:4/5;background:var(--la-stone) center/cover;"></div>
+        </div>
+      </div>
+    </div>
+    <hr class="learnworlds-divider" style="margin:48px 0;">
+    <h3 class="learnworlds-heading3 learnworlds-heading3-normal">Heading 3, normal</h3>
+    <h4 class="learnworlds-heading4 learnworlds-heading4-large">Heading 4, large</h4>
+    <div class="learnworlds-main-text learnworlds-main-text-small">Small text — captions, meta, disclaimers.</div>
+    <div style="margin-top:32px;max-width:420px;display:grid;gap:20px;">
+      <input class="learnworlds-input learnworlds-input-normal learnworlds-input-solid-light" placeholder="Full name">
+      <input class="learnworlds-input learnworlds-input-normal learnworlds-input-solid-light" placeholder="Email address">
+      <div><a class="learnworlds-button learnworlds-button-small learnworlds-button-solid-brand" href="#">Send enquiry</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Dark native section ===== -->
+<section class="js-learnworlds-section learnworlds-section la-ink learnworlds-align-left" id="section_preview_2">
+  <div class="learnworlds-section-content">
+    <h2 class="learnworlds-heading learnworlds-heading-small">The same widgets on an ink section</h2>
+    <div class="learnworlds-main-text learnworlds-main-text-normal">Add the class <code>la-ink</code> to a section in the builder and every child re-reads its colours from the context tokens. No per-element colour picking.</div>
+    <div class="learnworlds-button-wrapper" style="margin-top:28px;display:flex;gap:12px;">
+      <a class="learnworlds-button learnworlds-button-normal learnworlds-button-solid-brand" href="#">Primary</a>
+      <a class="learnworlds-button learnworlds-button-normal learnworlds-button-outline-brand" href="#">Secondary</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Tokens ===== -->
+<div class="harness-label">B · Tokens</div>
+<section class="learnworlds-section">
+  <div class="learnworlds-section-content">
+    <div class="swatches">
+      <div class="swatch"><i style="background:var(--la-ink)"></i><b>--la-ink</b></div>
+      <div class="swatch"><i style="background:var(--la-paper)"></i><b>--la-paper</b></div>
+      <div class="swatch"><i style="background:var(--la-stone)"></i><b>--la-stone</b></div>
+      <div class="swatch"><i style="background:var(--la-stone-deep)"></i><b>--la-stone-deep</b></div>
+    </div>
+    <div style="margin-top:40px;display:grid;gap:12px;">
+      <p class="la-display la-t-hero" style="margin:0">Hero · Sentient italic 300</p>
+      <p class="la-display la-t-h2" style="margin:0">Heading 2 · Sentient italic 300</p>
+      <p class="la-eyebrow">Eyebrow · General Sans 500</p>
+      <p class="la-body">Body · General Sans 400, held to a 68-character measure so long paragraphs stay readable at any viewport.</p>
+    </div>
+  </div>
+</section>
+
+<div class="harness-label">C · Paste-in block library</div>
+<!--BLOCKS-->
+
+<footer class="lw-footer">
+  <div class="learnworlds-section-content" style="display:flex;gap:64px;flex-wrap:wrap;">
+    <div class="footer-col"><div class="lw-footer-links"><a href="#">Courses</a><br><a href="#">About</a><br><a href="#">Contact</a></div></div>
+    <div class="footer-col"><div class="lw-footer-links"><a href="#">Privacy policy</a><br><a href="#">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="../dist/lamour.js"></script>
+</body>
+</html>

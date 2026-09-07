@@ -1,0 +1,71 @@
+/* =========================================================================
+   L'Amour — LearnWorlds theme layer
+   00-tokens.css — the single source of design truth.
+
+   Ported 1:1 from the redesigned site's `src/app/globals.css` @theme block
+   (~/dev/lamour-website). If a token changes there, change it here. Nothing
+   downstream in this file set may hard-code a colour, a radius, or a gap.
+
+   Palette is deliberately near-monochrome. Colour comes from photography,
+   never from UI chrome. See lamour-website/DESIGN-BRIEF.md §1.
+   ========================================================================= */
+
+:root {
+  /* -- colour -- */
+  --la-ink: #0b0b0a;
+  --la-paper: #ffffff;
+  --la-stone: #eae5dc;
+  --la-stone-deep: #d8d1c4;
+  --la-line-on-light: rgb(11 11 10 / 12%);
+  --la-line-on-dark: rgb(255 255 255 / 16%);
+  --la-muted-on-light: rgb(11 11 10 / 62%);
+  --la-muted-on-dark: rgb(255 255 255 / 68%);
+
+  /* -- type -- */
+  --la-font-display: "Sentient", "Sentient Fallback", Georgia, serif;
+  --la-font-sans: "General Sans", "General Sans Fallback",
+    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* -- editorial spacing rhythm --
+     Fluid by design. Do not swap these for fixed px to "tighten density";
+     the generous whitespace is the layout, not decoration. */
+  --la-section-y: clamp(4.5rem, 8vw, 8rem);
+  --la-gutter: clamp(1.25rem, 4vw, 4rem);
+  --la-measure: 68ch;          /* max line length for body copy */
+  --la-content-max: 1440px;    /* outer content cap */
+
+  /* -- motion -- */
+  --la-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --la-dur: 300ms;
+
+  /* -- geometry --
+     The system has no rounded corners. This token exists so a future
+     decision to soften them is one line, not a find-and-replace. */
+  --la-radius: 0px;
+  --la-hairline: 1px;
+}
+
+/* Surface contexts. Any block can be flipped light/dark by adding one class,
+   and every child reads its ink/line/muted from the context rather than
+   re-declaring colours. */
+.la-on-light,
+body.lw-page {
+  --la-fg: var(--la-ink);
+  --la-bg: var(--la-paper);
+  --la-line: var(--la-line-on-light);
+  --la-muted: var(--la-muted-on-light);
+}
+.la-on-dark,
+.lw-dark-bg,
+.lw-brand-bg {
+  --la-fg: var(--la-paper);
+  --la-bg: var(--la-ink);
+  --la-line: var(--la-line-on-dark);
+  --la-muted: var(--la-muted-on-dark);
+}
+.la-on-stone {
+  --la-fg: var(--la-ink);
+  --la-bg: var(--la-stone);
+  --la-line: var(--la-line-on-light);
+  --la-muted: var(--la-muted-on-light);
+}

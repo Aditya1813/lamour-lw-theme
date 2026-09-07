@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installing the L'Amour theme on LearnWorlds</title>
+<style>
+  :root{
+    --ink:#0b0b0a; --paper:#fff; --stone:#eae5dc; --stone-2:#f6f3ee;
+    --line:rgb(11 11 10/12%); --muted:rgb(11 11 10/62%); --accentbg:#f6f3ee;
+    --code-bg:#f4f2ee; --code-fg:#0b0b0a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#f2efe9; --paper:#0d0d0c; --stone:#1a1917; --stone-2:#141413;
+      --line:rgb(242 239 233/16%); --muted:rgb(242 239 233/62%); --accentbg:#141413;
+      --code-bg:#171614; --code-fg:#f2efe9;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font:400 16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(2rem,6vw,5rem) clamp(1.25rem,4vw,2.5rem) 6rem}
+  h1{font:600 clamp(1.9rem,4.5vw,2.75rem)/1.1 inherit;letter-spacing:-.025em;margin:0 0 .5rem;text-wrap:balance}
+  .sub{color:var(--muted);font-size:1.05rem;margin:0 0 3rem;max-width:62ch}
+  h2{font:600 1.35rem/1.25 inherit;letter-spacing:-.015em;margin:3.5rem 0 .25rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+  h2 .n{color:var(--muted);font-variant-numeric:tabular-nums;margin-right:.6em;font-weight:500}
+  h3{font:600 1rem/1.35 inherit;margin:2rem 0 .5rem}
+  p{margin:.75rem 0;max-width:68ch}
+  ul,ol{max-width:68ch;padding-left:1.2rem}
+  li{margin:.4rem 0}
+  code{font:500 .875em/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code-bg);padding:.15em .4em;border-radius:3px}
+  pre{
+    background:var(--code-bg);color:var(--code-fg);border:1px solid var(--line);
+    padding:1rem 1.1rem;border-radius:6px;overflow-x:auto;
+    font:400 13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  pre code{background:none;padding:0;font-size:inherit}
+  table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.9rem}
+  th,td{text-align:left;padding:.6rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:600;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  td code{font-size:.82em;white-space:nowrap}
+  .callout{background:var(--accentbg);border-left:3px solid var(--ink);padding:1rem 1.25rem;margin:1.5rem 0;border-radius:0 4px 4px 0}
+  .callout p{margin:.35rem 0}
+  .callout strong{font-weight:600}
+  .lede{font-size:1.05rem}
+  .pill{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.2rem .5rem;border-radius:3px;vertical-align:middle}
+  .muted{color:var(--muted)}
+  hr{border:0;border-top:1px solid var(--line);margin:3rem 0}
+  a{color:inherit}
+  @media print{body{background:#fff;color:#000}pre{white-space:pre-wrap}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Installing the L'Amour theme on LearnWorlds</h1>
+<p class="sub">One stylesheet and one script re-skin the whole white-label school in the redesigned site's design system. After this setup, changing the design never means opening LearnWorlds again.</p>
+
+<div class="callout">
+  <p><strong>The idea in one line.</strong> LearnWorlds holds four lines of code. Everything else lives in <code>~/dev/lamour-lw-theme</code>, in git — so a design change is <code>./build.sh</code> and a push, not a copy-paste into a text box in a web app.</p>
+</div>
+
+<h2><span class="n">01</span>Pick where the files are hosted</h2>
+<p>LearnWorlds will load two files by URL. They need to sit somewhere public with permissive CORS. Three realistic options:</p>
+<table>
+  <tr><th>Option</th><th>Setup</th><th>Deploy</th><th>Verdict</th></tr>
+  <tr>
+    <td><strong>GitHub Pages</strong></td>
+    <td>New public repo, Settings → Pages → deploy from <code>main</code></td>
+    <td><code>git push</code>, live in ~30s</td>
+    <td><span class="pill">Recommended</span> Free, already have the account, short cache.</td>
+  </tr>
+  <tr>
+    <td>Cloudflare Pages</td>
+    <td>Connect the repo once</td>
+    <td><code>git push</code>, live in ~15s</td>
+    <td>Marginally faster. Worth it only if you're already in Cloudflare.</td>
+  </tr>
+  <tr>
+    <td>jsDelivr from GitHub</td>
+    <td>Nothing beyond a public repo</td>
+    <td><code>git push</code>, then up to <strong>12h cache</strong> on <code>@main</code></td>
+    <td>Avoid for active work — you'd have to tag a version per change.</td>
+  </tr>
+</table>
+<p class="muted">The existing <code>lamour-website</code> repo is private, so it can't serve these. Use a separate public repo — it contains only CSS and JS, no content and no keys.</p>
+
+<h3>Publishing it</h3>
+<pre><code>cd ~/dev/lamour-lw-theme
+./build.sh
+git init &amp;&amp; git add -A &amp;&amp; git commit -m "L'Amour LearnWorlds theme layer"
+gh repo create lamour-lw-theme --public --source=. --push
+gh api -X POST repos/:owner/lamour-lw-theme/pages \
+  -f 'source[branch]=main' -f 'source[path]=/'</code></pre>
+<p>Your two URLs are then:</p>
+<pre><code>https://aditya1813.github.io/lamour-lw-theme/dist/lamour.css
+https://aditya1813.github.io/lamour-lw-theme/dist/lamour.js</code></pre>
+
+<h2><span class="n">02</span>Paste four lines into LearnWorlds</h2>
+<p>In LearnWorlds: <strong>Website → Design → Edit Website → Site → Site custom code</strong>.</p>
+<p>Paste the block below into <em>both</em> <code>&lt;head&gt; logged out</code> and <code>&lt;head&gt; logged in</code>:</p>
+<pre><code>&lt;link rel="preconnect" href="https://api.fontshare.com" crossorigin&gt;
+&lt;link rel="preconnect" href="https://cdn.fontshare.com" crossorigin&gt;
+&lt;link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=sentient@300i,500i&amp;f%5B%5D=general-sans@200,300,400,500,600,700&amp;display=swap"&gt;
+&lt;link rel="stylesheet" href="https://aditya1813.github.io/lamour-lw-theme/dist/lamour.css?v=1"&gt;
+&lt;script defer src="https://aditya1813.github.io/lamour-lw-theme/dist/lamour.js?v=1"&gt;&lt;/script&gt;</code></pre>
+
+<div class="callout">
+  <p><strong>The course player never receives the <code>&lt;head&gt;</code> slot.</strong> It is the one documented exception. To reach it, paste the same two <code>lamour.*</code> lines (the stylesheet and the script — the font lines too) into <code>&lt;body&gt; logged in</code> as well. Browsers honour a <code>&lt;link&gt;</code> in the body, and the duplicate on ordinary logged-in pages costs nothing: the file is already cached.</p>
+</div>
+
+<h2><span class="n">03</span>Paste the forms stylesheet by hand</h2>
+<p>Sign-in, sign-up and checkout forms render through a separate slot that the <code>&lt;head&gt;</code> stylesheet doesn't reach. Copy the whole of <code>dist/lamour-dynamic-slot.css</code> into:</p>
+<p><strong>Site custom code → <code>&lt;style&gt;</code> Dynamic (css)</strong></p>
+<p>It's ~35 lines and it changes rarely, so hand-pasting is fine here. It is the only slot you'll ever have to re-paste.</p>
+
+<h2><span class="n">04</span>Turn off what would fight it</h2>
+<p>The stylesheet uses <code>!important</code> to beat LearnWorlds' inline styles, but it can't beat colours you set on individual elements in the builder. Before checking your work:</p>
+<ul>
+  <li><strong>Theme Explorer → Typography</strong> — leave whatever font is set; the stylesheet overrides it. Don't bother uploading Sentient/General Sans as custom fonts, Fontshare already serves them.</li>
+  <li><strong>Theme Explorer → Colours</strong> — set brand, accent 1 and accent 2 all to <code>#0B0B0A</code>. The theme collapses them to ink anyway, and matching them means the builder's own previews stop lying to you.</li>
+  <li><strong>Per-element colour overrides</strong> — any text or button where someone picked a colour in the sidebar will keep it. Clear those as you find them.</li>
+</ul>
+
+<h2><span class="n">05</span>Check it</h2>
+<p>Open the school and confirm, in this order:</p>
+<ol>
+  <li>Headings are Sentient italic, body is General Sans. If not, the Fontshare line didn't paste or the CDN URL is wrong.</li>
+  <li>Buttons are square, uppercase, tracked, no underline.</li>
+  <li>Sections have the tall fluid padding, not the template's default.</li>
+  <li>Log in and open a course — the player should have the fonts. If it doesn't, step 02's body-slot paste is missing.</li>
+  <li>Sign out and open the sign-in page — inputs should be hairline underlines. If not, step 03 is missing.</li>
+</ol>
+
+<h2><span class="n">06</span>How you change it from now on</h2>
+<pre><code>cd ~/dev/lamour-lw-theme
+# edit src/*.css
+./build.sh
+open http://localhost:8791/preview/index.html   # after: python3 -m http.server 8791
+git commit -am "…" &amp;&amp; git push</code></pre>
+<p>Live within a minute. The only time you touch LearnWorlds again is to bump <code>?v=1</code> to <code>?v=2</code> in the head slots, and only if a browser is stubbornly holding an old copy.</p>
+
+<hr>
+
+<h2><span class="n">07</span>Building pages</h2>
+<p>There are two ways to put a section on a page, and the order matters.</p>
+<h3>First choice — LearnWorlds' native widgets</h3>
+<p>Heading, text, button, image and column widgets all come out on-brand automatically, because the stylesheet targets LearnWorlds' own class names. A page built this way stays editable by someone who doesn't write code, which is the whole point of being on LearnWorlds. Two classes are worth knowing — add them to a section in the builder's section settings:</p>
+<table>
+  <tr><th>Class</th><th>Effect</th></tr>
+  <tr><td><code>la-stone</code></td><td>Warm neutral band instead of white — use it to alternate sections.</td></tr>
+  <tr><td><code>la-ink</code></td><td>Black section; every child re-reads its colours, no per-element picking.</td></tr>
+  <tr><td><code>la-bleed</code></td><td>On a full-bleed photo section: removes the padding so the image is the section.</td></tr>
+</table>
+
+<h3>Second choice — the block library</h3>
+<p>For the few layouts the builder can't make. Add an HTML widget to a section and paste the file's contents:</p>
+<table>
+  <tr><th>File</th><th>What it is</th></tr>
+  <tr><td><code>blocks/01-hero.html</code></td><td>Full-bleed photograph, ink veil, headline on the lower third</td></tr>
+  <tr><td><code>blocks/02-stats.html</code></td><td>Course-structure figures that count up once on entry</td></tr>
+  <tr><td><code>blocks/03-journey-spine.html</code></td><td>Numbered enrol → aftercare sequence</td></tr>
+  <tr><td><code>blocks/04-pull-quote.html</code></td><td>Full-bleed attributed quote</td></tr>
+  <tr><td><code>blocks/05-editorial-split.html</code></td><td>Image one side, text the other</td></tr>
+  <tr><td><code>blocks/06-cta-band.html</code></td><td>Closing call to action, two actions maximum</td></tr>
+  <tr><td><code>blocks/07-accreditation.html</code></td><td>Text-only approval strip</td></tr>
+  <tr><td><code>blocks/08-course-index.html</code></td><td>Hairline course list, prospectus-style</td></tr>
+</table>
+<div class="callout">
+  <p><strong>Two claims rules are baked into the blocks and must survive editing.</strong></p>
+  <p>The stats block carries course-structure figures only — <em>never</em> a graduate or student count. The accreditation strip's wording is a placeholder marked <code>REPLACE</code>: put the approved wording in word for word, don't paraphrase it, don't shorten it, and don't put a guarantee anywhere near it. No third-party logos.</p>
+</div>
+
+<h3>Images</h3>
+<p>Upload through LearnWorlds' own image library and use the URL it gives you — it looks like <code>https://lwfiles.mycourse.app/6a9a7a4771cb6116e364cb52-public/…</code>. That's your school's CDN and it's the right place for photography. The theme repo hosts CSS and JS only; don't put images in it.</p>
+
+<hr>
+
+<h2><span class="n">08</span>Reference: what LearnWorlds actually gives you</h2>
+<p>Worth knowing when you want to do something this setup doesn't cover.</p>
+<table>
+  <tr><th>Slot</th><th>Scope</th><th>Takes</th></tr>
+  <tr><td><code>&lt;head&gt;</code> logged in / logged out</td><td>Every page of the template</td><td>HTML + liquid</td></tr>
+  <tr><td><code>&lt;body&gt;</code> logged in / logged out</td><td>Every page — <em>and the course player</em></td><td>HTML + liquid</td></tr>
+  <tr><td><code>&lt;style&gt;</code> Dynamic</td><td>Sign-in / sign-up / checkout forms</td><td>CSS</td></tr>
+  <tr><td><code>&lt;style&gt;</code> built-in pages</td><td>social, profile, workpad, account…</td><td>CSS</td></tr>
+  <tr><td><code>&lt;body&gt;</code> after purchase / after registration</td><td>Post-conversion only</td><td>HTML + liquid</td></tr>
+  <tr><td>Page slots</td><td>One page — same six shapes</td><td>HTML / CSS</td></tr>
+  <tr><td>Selected element → Edit HTML</td><td>One element on one page</td><td>HTML</td></tr>
+</table>
+<p>Two hooks the theme leans on heavily, and you can too:</p>
+<ul>
+  <li><strong><code>body.slug-{slug}</code></strong> — every page carries its slug as a body class, so <code>body.slug-account p { … }</code> targets one built-in page. Built-in slugs: <code>social</code>, <code>profile</code>, <code>workpad</code>, <code>account</code>, <code>dailynews</code>, <code>people</code>, <code>inbox</code>.</li>
+  <li><strong>Liquid</strong> — <code>{{USER.NAME}}</code>, <code>{{REQUEST.SLUG}}</code>, <code>{% if USER.TAGS contains 'x' %}</code>, <code>{% unless REQUEST.IS_COURSE_PLAYER %}</code>. Conditionals need the Learning Center plan or higher. Useful for things like showing an alumni-only band to tagged users without building a second page.</li>
+</ul>
+
+<h2><span class="n">09</span>If you'd rather not host anything</h2>
+<p>It works without a CDN: paste the entire contents of <code>dist/lamour.css</code> inside a <code>&lt;style&gt;…&lt;/style&gt;</code> in the head slots, and <code>dist/lamour.js</code> inside <code>&lt;script&gt;…&lt;/script&gt;</code>. It's ~37 kB, which LearnWorlds accepts.</p>
+<p>The cost is real, though: every change means re-pasting into four slots by hand, there's no version history, and there's nothing stopping the four copies from drifting apart. Take this route only if hosting is genuinely blocked.</p>
+
+<hr>
+<p class="muted" style="font-size:.85rem">Source of truth for the design tokens: <code>~/dev/lamour-website/src/app/globals.css</code>. Theme layer: <code>~/dev/lamour-lw-theme</code>. Verified against LearnWorlds site builder v4.162.12.</p>
+
+</div>
+</body>
+</html>

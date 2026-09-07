@@ -1,0 +1,162 @@
+/* =========================================================================
+   10-base.css — typography, interaction feel, motion primitives.
+   Nothing here knows about LearnWorlds; it is the brand's own layer.
+   ========================================================================= */
+
+/* LearnWorlds writes the theme font onto <body> as an inline custom property
+   (style="--font-family-main-text: Nunito"). An author !important beats a
+   non-important inline declaration, which is the whole reason this works
+   without touching the Theme Explorer's font picker. */
+body.lw-page {
+  --font-family-main-text: "General Sans" !important;
+  font-family: var(--la-font-sans) !important;
+  background: var(--la-paper);
+  color: var(--la-ink);
+  font-feature-settings: "ss01" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--la-ink);
+  color: var(--la-paper);
+}
+
+/* ---------------------------------------------------------------------------
+   Display type.
+
+   Sentient is italic-only in this brand kit (Light 300 / Medium 500) — there
+   is no roman cut, so `font-style: italic` is not emphasis here, it is the
+   typeface. Never let this class touch body copy.
+
+   Tracking is size-specific: italic sidebearings already read loose, so large
+   sizes need real negative tracking while small sizes sit near zero. Leading
+   moves inversely — tight when large, open when small. A single flat value is
+   wrong somewhere on the scale.
+   -------------------------------------------------------------------------- */
+.la-display {
+  font-family: var(--la-font-display);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.la-display--medium { font-weight: 500; }
+
+.la-t-hero    { font-size: clamp(2.75rem, 7vw, 5.5rem);  letter-spacing: -0.032em; line-height: 1.04; }
+.la-t-display { font-size: clamp(2.25rem, 5.2vw, 4rem);  letter-spacing: -0.028em; line-height: 1.06; }
+.la-t-h1      { font-size: clamp(2rem, 4.2vw, 3.25rem);  letter-spacing: -0.024em; line-height: 1.09; }
+.la-t-h2      { font-size: clamp(1.65rem, 3.2vw, 2.5rem);letter-spacing: -0.018em; line-height: 1.13; }
+.la-t-h3      { font-size: clamp(1.35rem, 2.4vw, 1.875rem); letter-spacing: -0.012em; line-height: 1.18; }
+.la-t-quote   { font-size: clamp(1.5rem, 3vw, 2.25rem);  letter-spacing: -0.018em; line-height: 1.24; }
+
+/* Body copy gets the opposite treatment — zero tracking, open leading,
+   a hard measure so lines never run past comfortable reading length. */
+.la-body {
+  font-family: var(--la-font-sans);
+  font-weight: 400;
+  font-size: clamp(1rem, 1.05vw, 1.125rem);
+  line-height: 1.65;
+  letter-spacing: 0;
+  text-wrap: pretty;
+  max-width: var(--la-measure);
+  color: var(--la-muted, var(--la-muted-on-light));
+}
+.la-body--lead {
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  line-height: 1.55;
+  color: var(--la-fg, var(--la-ink));
+}
+
+/* The eyebrow: the one place tracking opens up. Used above every section
+   heading to carry the section's category without a second typeface. */
+.la-eyebrow {
+  font-family: var(--la-font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--la-muted, var(--la-muted-on-light));
+}
+
+/* ---------------------------------------------------------------------------
+   .la-pressable — feedback on pointer-down, not on release.
+
+   Hover does not exist on touch, and most of this school's traffic is mobile.
+   Without this there is literally no feedback between tap and navigation.
+   Press is instant and short; release eases back on the editorial curve, so
+   letting go feels softer than pressing down.
+   -------------------------------------------------------------------------- */
+.la-pressable {
+  touch-action: manipulation;          /* also drops the legacy ~300ms tap delay */
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 220ms var(--la-ease),
+    background-color var(--la-dur) var(--la-ease),
+    color var(--la-dur) var(--la-ease),
+    border-color var(--la-dur) var(--la-ease),
+    opacity 220ms var(--la-ease);
+}
+.la-pressable:active {
+  transform: scale(0.97);
+  transition-duration: 100ms;
+  transition-timing-function: ease-out;
+}
+/* A full-width card scaling 3% reads as the page lurching, not a press. */
+.la-pressable-surface:active { transform: scale(0.994); }
+
+/* Scaling a 12px nav label reads as a wobble. Text presses with opacity. */
+.la-pressable-text {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color var(--la-dur) var(--la-ease),
+    opacity 200ms var(--la-ease),
+    text-decoration-color var(--la-dur) var(--la-ease);
+}
+.la-pressable-text:active { opacity: 0.6; transition-duration: 80ms; }
+
+/* A visible keyboard focus ring in brand monochrome. currentColor means it
+   inverts correctly on dark sections without a second rule. */
+body.lw-page :focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------------
+   Reveal on scroll. Driven by lamour.js (IntersectionObserver).
+
+   The no-js / observer-unsupported path must still show content, so the
+   hidden state is applied by the script (via .la-js on <html>) rather than
+   sitting in the stylesheet where a failed script would leave a blank page.
+   -------------------------------------------------------------------------- */
+.la-js [data-la-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 700ms var(--la-ease),
+    transform 700ms var(--la-ease);
+}
+.la-js [data-la-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+/* Stagger children of a revealed group without writing per-item delays. */
+.la-js [data-la-reveal-group] > * { transition-delay: calc(var(--la-i, 0) * 70ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Reduced motion means a gentler equivalent, not no feedback. */
+  .la-pressable:active,
+  .la-pressable-surface:active { transform: none; opacity: 0.72; }
+  .la-js [data-la-reveal] { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Hairline rule used between editorial rows. Never a thick divider. */
+.la-rule {
+  border: 0;
+  border-top: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
+  margin: 0;
+}
