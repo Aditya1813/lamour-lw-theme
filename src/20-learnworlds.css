@@ -14,7 +14,7 @@
 
 /* ---- Sections & rhythm ------------------------------------------------- */
 
-body.lw-page .learnworlds-section {
+body.lw-page .learnworlds-section:not(.lw-topbar) {
   padding-top: var(--la-section-y);
   padding-bottom: var(--la-section-y);
   background-color: var(--la-bg, var(--la-paper));
@@ -247,13 +247,7 @@ body.lw-page .learnworlds-divider {
    one hairline under the bar instead of a shadow. */
 
 body.lw-page .lw-topbar {
-  background-color: transparent;
-  border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
-  box-shadow: none !important;
-}
-/* Only claim the bar when the template hasn't already made it dark. */
-body.lw-page .lw-topbar:not(.lw-dark-bg):not(.lw-brand-bg) {
-  background-color: var(--la-paper);
+  box-shadow: none !important;   /* the bar is a hairline, never a shadow */
 }
 body.lw-page .lw-topbar-option-link-lbl,
 body.lw-page .lw-topbar-option-link {

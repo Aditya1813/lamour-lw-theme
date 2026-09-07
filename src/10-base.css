@@ -7,11 +7,15 @@
    (style="--font-family-main-text: Nunito"). An author !important beats a
    non-important inline declaration, which is the whole reason this works
    without touching the Theme Explorer's font picker. */
+/* Deliberately NOT setting background or color on <body>. The template owns
+   the page's ground (it carries its own `lw-body-bg`), and the top bar is
+   `transparent-onStart` — it shows straight through to the body at scroll
+   top. Forcing paper here put a white band above a dark template. Section
+   and text colours come from the context tokens instead, which are correct
+   on a light template and a dark one. */
 body.lw-page {
   --font-family-main-text: "General Sans" !important;
   font-family: var(--la-font-sans) !important;
-  background: var(--la-paper);
-  color: var(--la-ink);
   font-feature-settings: "ss01" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

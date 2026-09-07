@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.09.07.1224
+/*! L'Amour LearnWorlds theme — build 2026.09.07.1227
     Source: ~/dev/lamour-lw-theme/src — edit there, never edit dist/.
     Design system of record: ~/dev/lamour-website/src/app/globals.css */
 
@@ -85,11 +85,15 @@ body.lw-page {
    (style="--font-family-main-text: Nunito"). An author !important beats a
    non-important inline declaration, which is the whole reason this works
    without touching the Theme Explorer's font picker. */
+/* Deliberately NOT setting background or color on <body>. The template owns
+   the page's ground (it carries its own `lw-body-bg`), and the top bar is
+   `transparent-onStart` — it shows straight through to the body at scroll
+   top. Forcing paper here put a white band above a dark template. Section
+   and text colours come from the context tokens instead, which are correct
+   on a light template and a dark one. */
 body.lw-page {
   --font-family-main-text: "General Sans" !important;
   font-family: var(--la-font-sans) !important;
-  background: var(--la-paper);
-  color: var(--la-ink);
   font-feature-settings: "ss01" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -256,7 +260,7 @@ body.lw-page :focus-visible {
 
 /* ---- Sections & rhythm ------------------------------------------------- */
 
-body.lw-page .learnworlds-section {
+body.lw-page .learnworlds-section:not(.lw-topbar) {
   padding-top: var(--la-section-y);
   padding-bottom: var(--la-section-y);
   background-color: var(--la-bg, var(--la-paper));
@@ -489,13 +493,7 @@ body.lw-page .learnworlds-divider {
    one hairline under the bar instead of a shadow. */
 
 body.lw-page .lw-topbar {
-  background-color: transparent;
-  border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
-  box-shadow: none !important;
-}
-/* Only claim the bar when the template hasn't already made it dark. */
-body.lw-page .lw-topbar:not(.lw-dark-bg):not(.lw-brand-bg) {
-  background-color: var(--la-paper);
+  box-shadow: none !important;   /* the bar is a hairline, never a shadow */
 }
 body.lw-page .lw-topbar-option-link-lbl,
 body.lw-page .lw-topbar-option-link {
