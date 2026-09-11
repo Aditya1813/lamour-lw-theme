@@ -290,6 +290,57 @@ body.lw-page .lw-topbar-option-link.button-like .lw-topbar-option-link-lbl {
   body.lw-page .lw-topbar-option-link:not(.button-like):hover { opacity: 0.55; }
 }
 body.lw-page .lw-topbar-option-link:not(.button-like):active { opacity: 0.6; }
+
+/* ---- Top bar on mobile: the hamburger panel ----------------------------
+   LearnWorlds folds the bar into a full-screen slide-down panel at
+   <=990.9px, and scales the ROOT font-size per device:
+   desktop 10px, tablet-landscape 10px, tablet-portrait 9px, phone 8px.
+   So the 0.75rem label above lands at 7.5px on desktop and 6px on a phone
+   — legible as a quiet desktop bar, unreadable as a full-screen menu.
+   Sizes here are px ON PURPOSE: the panel is a set of touch targets and
+   must not inherit LearnWorlds' per-device root scaling. */
+@media (max-width: 990px) {
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-options {
+    padding: 24px 20px !important;   /* LW ships 40px; that eats a phone's width */
+  }
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-option {
+    margin-bottom: 2px !important;
+  }
+
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-option-link,
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-option-link-lbl {
+    font-size: 20px !important;
+    letter-spacing: 0.06em !important;  /* 0.12em is too loose at this size */
+    line-height: 1.2 !important;
+  }
+
+  /* A 44px minimum row — the label becomes a comfortable tap target. */
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-option-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+    padding: 10px 8px !important;
+  }
+
+  /* Sub-items sit one step down, still far above the desktop size. */
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-submenu .lw-topbar-option-link,
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-submenu-item > a,
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-submenu-item > a .lw-topbar-option-link-lbl {
+    font-size: 17px !important;
+  }
+
+  /* The CTA keeps its button shape and grows with everything else. */
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-option-link.button-like,
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-option-link.button-like .lw-topbar-option-link-lbl {
+    font-size: 15px !important;
+  }
+  body.lw-page .lw-topbar .lw-topbar-menu-wrapper .lw-topbar-option-link.button-like {
+    min-height: 48px !important;
+    padding: 14px 24px !important;
+    margin-top: 12px !important;
+  }
+}
 /* The logo's square frame is never altered — only its box is spaced. */
 body.lw-page .lw-logo img { border-radius: 0 !important; }
 
