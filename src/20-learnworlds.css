@@ -479,7 +479,7 @@ body.lw-page .la-footer-wordmark {
   font-family: var(--la-font-display);
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(3.25rem, 13.5vw, 13rem);
+  font-size: clamp(2.25rem, 11vw, 12rem);   /* fits 'L’Amour Institute' on a 360px phone */
   line-height: 0.9;
   letter-spacing: -0.035em;
   white-space: nowrap;

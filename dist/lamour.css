@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1224
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1226
     Source: ~/dev/lamour-lw-theme/src — edit there, never edit dist/.
     Design system of record: ~/dev/lamour-website/src/app/globals.css */
 
@@ -250,29 +250,31 @@ body.lw-page :focus-visible {
    kick   — kickers slide in 16px, their hairline draws first (site: .kick/.grow)
    settle — pictures open from the bottom and settle from 1.08 (site: .blind/.settle) */
 .la-js [data-la-reveal] { transition-delay: calc(var(--la-i, 0) * 90ms); }
-.la-js [data-la-reveal="rise"] {
-  transform: translateY(0.45em);
-  clip-path: inset(0 0 100% 0);
-  transition:
-    opacity 900ms var(--la-ease),
-    transform 1150ms var(--la-ease),
-    clip-path 1150ms var(--la-ease);
-  transition-delay: calc(var(--la-i, 0) * 90ms);
+/* The mask runs as an animation that starts on reveal. A hidden state that
+   is itself fully clipped never counts as on-screen for the observer, so
+   it would never reveal (stat-box headings stayed blank, 29 Oct 2026). */
+.la-js [data-la-reveal="rise"] { transform: translateY(0.45em); }
+.la-js [data-la-reveal="rise"].is-revealed {
+  animation: la-rise 1150ms var(--la-ease) both;
+  animation-delay: calc(var(--la-i, 0) * 90ms);
 }
-.la-js [data-la-reveal="rise"].is-revealed { clip-path: inset(-0.2em -0.2em -0.3em -0.2em); }
+@keyframes la-rise {
+  from { clip-path: inset(0 0 100% 0); transform: translateY(0.45em); opacity: 0; }
+  30%  { opacity: 1; }
+  to   { clip-path: inset(-0.3em -0.3em -0.4em -0.3em); transform: none; opacity: 1; }
+}
 .la-js [data-la-reveal="kick"] { transform: translateX(-16px); }
 .la-js [data-la-reveal="kick"]::before { transform: scaleX(0); transition: transform 800ms var(--la-ease); transition-delay: inherit; }
 .la-js [data-la-reveal="kick"].is-revealed::before { transform: scaleX(1); }
-.la-js [data-la-reveal="settle"] {
-  opacity: 1;
-  transform: translateY(40px);
-  clip-path: inset(100% 0 0 0);
-  transition:
-    transform 1200ms var(--la-ease),
-    clip-path 1200ms var(--la-ease);
-  transition-delay: calc(var(--la-i, 0) * 90ms);
+.la-js [data-la-reveal="settle"] { transform: translateY(40px); }
+.la-js [data-la-reveal="settle"].is-revealed {
+  animation: la-blind 1200ms var(--la-ease) both;
+  animation-delay: calc(var(--la-i, 0) * 90ms);
 }
-.la-js [data-la-reveal="settle"].is-revealed { clip-path: inset(0); }
+@keyframes la-blind {
+  from { clip-path: inset(100% 0 0 0); transform: translateY(40px); opacity: 1; }
+  to   { clip-path: inset(0); transform: none; opacity: 1; }
+}
 .la-js [data-la-reveal="settle"] > .js-screen-image-wrapper,
 .la-js [data-la-reveal="settle"] img {
   transform: scale(1.08);
@@ -779,7 +781,7 @@ body.lw-page .la-footer-wordmark {
   font-family: var(--la-font-display);
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(calc(3.25 * var(--la-rem)), 13.5vw, calc(13 * var(--la-rem)));
+  font-size: clamp(calc(2.25 * var(--la-rem)), 11vw, calc(12 * var(--la-rem)));   /* fits 'L’Amour Institute' on a 360px phone */
   line-height: 0.9;
   letter-spacing: -0.035em;
   white-space: nowrap;
