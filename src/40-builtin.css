@@ -119,6 +119,25 @@ body.slug-path-player .default-course-player-nav-btn svg {
     opacity: 0.6;
   }
 }
+/* LearnWorlds draws the arrows as two stacked border triangles, one of them
+   hard-coded black, which only reads on the stock light bar. On ink they
+   vanished (phone width shows arrows only). Redrawn as one hairline chevron. */
+body.slug-path-player .default-course-player-nav-btn-arrow::before,
+body.slug-path-player .default-course-player-nav-btn-arrow::after {
+  display: none !important;
+}
+body.slug-path-player .default-course-player-nav-btn-arrow {
+  width: 9px !important;
+  height: 9px !important;
+  border: 0 !important;
+  border-top: 1.5px solid var(--la-paper) !important;
+  border-right: 1.5px solid var(--la-paper) !important;
+  transform: rotate(45deg);
+  margin: 0 6px !important;
+}
+body.slug-path-player .default-course-player-nav-btn.previous .default-course-player-nav-btn-arrow {
+  transform: rotate(-135deg);
+}
 body.slug-path-player .clr1-bg {
   background-color: var(--la-ink) !important;
 }
