@@ -94,6 +94,14 @@ body.lw-page .learnworlds-heading4-large   { font-size: clamp(1.25rem, 2vw, 1.5r
 body.lw-page .learnworlds-heading4-normal  { font-size: clamp(1.125rem, 1.6vw, 1.25rem)!important;letter-spacing: -0.004em; line-height: 1.28; }
 body.lw-page .learnworlds-heading4-small   { font-size: 1rem !important; letter-spacing: 0.005em; line-height: 1.4; }
 
+/* The builder's text editor leaves an empty `<div><br></div>` after a
+   heading when someone presses Return at the end. It adds a blank line
+   that pushes everything under it out of line (Lishma's card on the
+   dashboard, 29 Oct 2026). A trailing empty line is never content. */
+body.lw-page [class*="learnworlds-heading"] > div:last-child:has(> br:only-child) {
+  display: none !important;
+}
+
 /* ---- Body text --------------------------------------------------------- */
 
 body.lw-page .learnworlds-main-text {
@@ -269,11 +277,23 @@ body.lw-page .learnworlds-divider {
 body.lw-page .lw-topbar {
   box-shadow: none !important;   /* the bar is a hairline, never a shadow */
 }
+/* LearnWorlds wraps the nav in `.lw-cols.lw-body-bg`, and lw-body-bg carries
+   the light tokens. On a dark bar that turned the labels ink-on-ink —
+   invisible on the live school until 29 Oct 2026. The bar's own background
+   decides the context, so re-assert dark inside a dark bar. */
+body.lw-page .lw-topbar.lw-brand-bg .lw-body-bg,
+body.lw-page .lw-topbar.lw-dark-bg .lw-body-bg {
+  --la-fg: var(--la-paper);
+  --la-bg: var(--la-ink);
+  --la-line: var(--la-line-on-dark);
+  --la-muted: var(--la-muted-on-dark);
+}
+/* px, not rem: the desktop root is 10px, so 0.75rem rendered a 7.5px label. */
 body.lw-page .lw-topbar-option-link:not(.button-like) .lw-topbar-option-link-lbl,
 body.lw-page .lw-topbar-option-link:not(.button-like) {
   text-decoration: none !important;
   font-family: var(--la-font-sans) !important;
-  font-size: 0.75rem !important;
+  font-size: 12px !important;
   font-weight: 500 !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
@@ -339,6 +359,35 @@ body.lw-page .lw-topbar-option-link:not(.button-like):active { opacity: 0.6; }
     min-height: 48px !important;
     padding: 14px 24px !important;
     margin-top: 12px !important;
+  }
+
+  /* The panel a student actually sees. Current LearnWorlds builds the open
+     menu as a separate `.lw-topbar-hamburger-menu` list (.mobile-nav-menu),
+     not by unfolding .lw-topbar-menu-wrapper, so the rules above never
+     reached it: labels rendered at 9px on a phone (29 Oct 2026). */
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-menu-link,
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-menu-link > span {
+    font-family: var(--la-font-sans) !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
+    color: var(--la-paper) !important;
+    text-decoration: none !important;
+  }
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-menu-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px;
+    min-height: 44px !important;
+    padding: 10px 8px !important;
+  }
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-subMenu .mobile-nav-menu-link,
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-subMenu .mobile-nav-menu-link > span {
+    font-size: 17px !important;
+    color: var(--la-muted-on-dark) !important;
   }
 }
 /* The logo's square frame is never altered — only its box is spaced. */

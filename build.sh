@@ -27,6 +27,21 @@ mkdir -p dist
   cat src/lamour.js
 } > dist/lamour.js
 
+# LearnWorlds' root font-size is 10px (8px on phones), not the 16px the
+# site's scale was drawn in. Pin every rem outside comments to the design
+# root; see --la-rem in 00-tokens.css. The dynamic slot is pasted by hand
+# and doesn't load the tokens, so it is left alone.
+python3 - dist/lamour.css <<'PY'
+import re, sys
+path = sys.argv[1]
+css = open(path).read()
+parts = re.split(r'(/\*.*?\*/)', css, flags=re.S)
+num = re.compile(r'(?<![\w.-])(\d*\.?\d+)rem\b')
+for i in range(0, len(parts), 2):
+    parts[i] = num.sub(r'calc(\1 * var(--la-rem))', parts[i])
+open(path, 'w').write(''.join(parts))
+PY
+
 cp src/50-dynamic-slot.css dist/lamour-dynamic-slot.css
 
 # The exact block to paste into the LearnWorlds head/body slots, stamped with

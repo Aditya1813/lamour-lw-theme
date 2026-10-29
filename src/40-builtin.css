@@ -54,6 +54,25 @@ body.slug-people .profile-card,
 body.slug-profile .profile-card { border-radius: 0 !important; }
 body[class*="slug-"] .profile-avatar { border-radius: 50% !important; }  /* faces stay round */
 
+/* ---- After-login dashboard (/start) ------------------------------------ */
+/* The stats row ends in a Messages tile whose column is set to the "body"
+   background, which this template paints white: a white block breaking a
+   row of quiet numbers. On a dark section it becomes a hairline tile that
+   reads as the inbox link it is. */
+body.slug-start .lw-dark-bg .col.lw-body-bg,
+body.slug-start .lw-brand-bg .col.lw-body-bg,
+body.slug-start .la-ink .col.lw-body-bg {
+  background-color: transparent !important;
+  border: var(--la-hairline) solid var(--la-line-on-dark) !important;
+  --la-fg: var(--la-paper);
+  --la-muted: var(--la-muted-on-dark);
+  color: var(--la-paper) !important;
+}
+body.slug-start .lw-brand-bg .col.lw-body-bg .learnworlds-overline-text,
+body.slug-start .lw-dark-bg .col.lw-body-bg .learnworlds-overline-text {
+  color: var(--la-paper) !important;
+}
+
 /* ---- Course player ---------------------------------------------------- */
 /* The player is a reading surface, not a marketing page: type gets a real
    measure and the chrome recedes. Kept conservative on purpose — breaking

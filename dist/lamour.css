@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.09.11.1054
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1157
     Source: ~/dev/lamour-lw-theme/src — edit there, never edit dist/.
     Design system of record: ~/dev/lamour-website/src/app/globals.css */
 
@@ -31,11 +31,19 @@
   --la-font-sans: "General Sans", "General Sans Fallback",
     -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
+  /* -- the rem the design was drawn in --
+     The site's scale assumes a 16px root. LearnWorlds sets the root to
+     10px on desktop and 8px on phones, which drew every rem here at
+     62% / 50% size. build.sh rewrites each `Nrem` in dist/ as
+     calc(N * var(--la-rem)), so the source keeps the site's numbers and
+     the school renders them at the size they were designed. */
+  --la-rem: 16px;
+
   /* -- editorial spacing rhythm --
      Fluid by design. Do not swap these for fixed px to "tighten density";
      the generous whitespace is the layout, not decoration. */
-  --la-section-y: clamp(4.5rem, 8vw, 8rem);
-  --la-gutter: clamp(1.25rem, 4vw, 4rem);
+  --la-section-y: clamp(calc(4.5 * var(--la-rem)), 8vw, calc(8 * var(--la-rem)));
+  --la-gutter: clamp(calc(1.25 * var(--la-rem)), 4vw, calc(4 * var(--la-rem)));
   --la-measure: 68ch;          /* max line length for body copy */
   --la-content-max: 1440px;    /* outer content cap */
 
@@ -133,19 +141,19 @@ body.lw-page {
 }
 .la-display--medium { font-weight: 500; }
 
-.la-t-hero    { font-size: clamp(2.75rem, 7vw, 5.5rem);  letter-spacing: -0.032em; line-height: 1.04; }
-.la-t-display { font-size: clamp(2.25rem, 5.2vw, 4rem);  letter-spacing: -0.028em; line-height: 1.06; }
-.la-t-h1      { font-size: clamp(2rem, 4.2vw, 3.25rem);  letter-spacing: -0.024em; line-height: 1.09; }
-.la-t-h2      { font-size: clamp(1.65rem, 3.2vw, 2.5rem);letter-spacing: -0.018em; line-height: 1.13; }
-.la-t-h3      { font-size: clamp(1.35rem, 2.4vw, 1.875rem); letter-spacing: -0.012em; line-height: 1.18; }
-.la-t-quote   { font-size: clamp(1.5rem, 3vw, 2.25rem);  letter-spacing: -0.018em; line-height: 1.24; }
+.la-t-hero    { font-size: clamp(calc(2.75 * var(--la-rem)), 7vw, calc(5.5 * var(--la-rem)));  letter-spacing: -0.032em; line-height: 1.04; }
+.la-t-display { font-size: clamp(calc(2.25 * var(--la-rem)), 5.2vw, calc(4 * var(--la-rem)));  letter-spacing: -0.028em; line-height: 1.06; }
+.la-t-h1      { font-size: clamp(calc(2 * var(--la-rem)), 4.2vw, calc(3.25 * var(--la-rem)));  letter-spacing: -0.024em; line-height: 1.09; }
+.la-t-h2      { font-size: clamp(calc(1.65 * var(--la-rem)), 3.2vw, calc(2.5 * var(--la-rem)));letter-spacing: -0.018em; line-height: 1.13; }
+.la-t-h3      { font-size: clamp(calc(1.35 * var(--la-rem)), 2.4vw, calc(1.875 * var(--la-rem))); letter-spacing: -0.012em; line-height: 1.18; }
+.la-t-quote   { font-size: clamp(calc(1.5 * var(--la-rem)), 3vw, calc(2.25 * var(--la-rem)));  letter-spacing: -0.018em; line-height: 1.24; }
 
 /* Body copy gets the opposite treatment — zero tracking, open leading,
    a hard measure so lines never run past comfortable reading length. */
 .la-body {
   font-family: var(--la-font-sans);
   font-weight: 400;
-  font-size: clamp(1rem, 1.05vw, 1.125rem);
+  font-size: clamp(calc(1 * var(--la-rem)), 1.05vw, calc(1.125 * var(--la-rem)));
   line-height: 1.65;
   letter-spacing: 0;
   text-wrap: pretty;
@@ -153,7 +161,7 @@ body.lw-page {
   color: var(--la-muted, var(--la-muted-on-light));
 }
 .la-body--lead {
-  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  font-size: clamp(calc(1.125 * var(--la-rem)), 1.5vw, calc(1.375 * var(--la-rem)));
   line-height: 1.55;
   color: var(--la-fg, var(--la-ink));
 }
@@ -162,7 +170,7 @@ body.lw-page {
    heading to carry the section's category without a second typeface. */
 .la-eyebrow {
   font-family: var(--la-font-sans);
-  font-size: 0.6875rem;
+  font-size: calc(0.6875 * var(--la-rem));
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -337,15 +345,23 @@ body.lw-page .learnworlds-heading4 {
   text-transform: none !important;
 }
 
-body.lw-page .learnworlds-heading-large    { font-size: clamp(2.75rem, 7vw, 5.5rem)   !important; letter-spacing: -0.032em; line-height: 1.04; }
-body.lw-page .learnworlds-heading-normal   { font-size: clamp(2.25rem, 5.2vw, 4rem)   !important; letter-spacing: -0.028em; line-height: 1.06; }
-body.lw-page .learnworlds-heading-small    { font-size: clamp(2rem, 4.2vw, 3.25rem)   !important; letter-spacing: -0.024em; line-height: 1.09; }
-body.lw-page .learnworlds-heading3-large   { font-size: clamp(1.85rem, 3.6vw, 2.75rem)!important; letter-spacing: -0.02em;  line-height: 1.11; }
-body.lw-page .learnworlds-heading3-normal  { font-size: clamp(1.65rem, 3.2vw, 2.5rem) !important; letter-spacing: -0.018em; line-height: 1.13; }
-body.lw-page .learnworlds-heading3-small   { font-size: clamp(1.35rem, 2.4vw, 1.875rem)!important;letter-spacing: -0.012em; line-height: 1.18; }
-body.lw-page .learnworlds-heading4-large   { font-size: clamp(1.25rem, 2vw, 1.5rem)   !important; letter-spacing: -0.008em; line-height: 1.22; }
-body.lw-page .learnworlds-heading4-normal  { font-size: clamp(1.125rem, 1.6vw, 1.25rem)!important;letter-spacing: -0.004em; line-height: 1.28; }
-body.lw-page .learnworlds-heading4-small   { font-size: 1rem !important; letter-spacing: 0.005em; line-height: 1.4; }
+body.lw-page .learnworlds-heading-large    { font-size: clamp(calc(2.75 * var(--la-rem)), 7vw, calc(5.5 * var(--la-rem)))   !important; letter-spacing: -0.032em; line-height: 1.04; }
+body.lw-page .learnworlds-heading-normal   { font-size: clamp(calc(2.25 * var(--la-rem)), 5.2vw, calc(4 * var(--la-rem)))   !important; letter-spacing: -0.028em; line-height: 1.06; }
+body.lw-page .learnworlds-heading-small    { font-size: clamp(calc(2 * var(--la-rem)), 4.2vw, calc(3.25 * var(--la-rem)))   !important; letter-spacing: -0.024em; line-height: 1.09; }
+body.lw-page .learnworlds-heading3-large   { font-size: clamp(calc(1.85 * var(--la-rem)), 3.6vw, calc(2.75 * var(--la-rem)))!important; letter-spacing: -0.02em;  line-height: 1.11; }
+body.lw-page .learnworlds-heading3-normal  { font-size: clamp(calc(1.65 * var(--la-rem)), 3.2vw, calc(2.5 * var(--la-rem))) !important; letter-spacing: -0.018em; line-height: 1.13; }
+body.lw-page .learnworlds-heading3-small   { font-size: clamp(calc(1.35 * var(--la-rem)), 2.4vw, calc(1.875 * var(--la-rem)))!important;letter-spacing: -0.012em; line-height: 1.18; }
+body.lw-page .learnworlds-heading4-large   { font-size: clamp(calc(1.25 * var(--la-rem)), 2vw, calc(1.5 * var(--la-rem)))   !important; letter-spacing: -0.008em; line-height: 1.22; }
+body.lw-page .learnworlds-heading4-normal  { font-size: clamp(calc(1.125 * var(--la-rem)), 1.6vw, calc(1.25 * var(--la-rem)))!important;letter-spacing: -0.004em; line-height: 1.28; }
+body.lw-page .learnworlds-heading4-small   { font-size: calc(1 * var(--la-rem)) !important; letter-spacing: 0.005em; line-height: 1.4; }
+
+/* The builder's text editor leaves an empty `<div><br></div>` after a
+   heading when someone presses Return at the end. It adds a blank line
+   that pushes everything under it out of line (Lishma's card on the
+   dashboard, 29 Oct 2026). A trailing empty line is never content. */
+body.lw-page [class*="learnworlds-heading"] > div:last-child:has(> br:only-child) {
+  display: none !important;
+}
 
 /* ---- Body text --------------------------------------------------------- */
 
@@ -355,11 +371,11 @@ body.lw-page .learnworlds-main-text {
   letter-spacing: 0;
   text-wrap: pretty;
 }
-body.lw-page .learnworlds-main-text-huge       { font-size: clamp(1.375rem, 2.4vw, 1.75rem) !important; line-height: 1.5; color: var(--la-fg, var(--la-ink)); }
-body.lw-page .learnworlds-main-text-large      { font-size: clamp(1.125rem, 1.5vw, 1.375rem)!important; line-height: 1.55; color: var(--la-fg, var(--la-ink)); }
-body.lw-page .learnworlds-main-text-normal     { font-size: clamp(1rem, 1.05vw, 1.125rem)   !important; line-height: 1.65; }
-body.lw-page .learnworlds-main-text-small      { font-size: 0.9375rem !important; line-height: 1.6; }
-body.lw-page .learnworlds-main-text-very-small { font-size: 0.8125rem !important; line-height: 1.55; letter-spacing: 0.01em; }
+body.lw-page .learnworlds-main-text-huge       { font-size: clamp(calc(1.375 * var(--la-rem)), 2.4vw, calc(1.75 * var(--la-rem))) !important; line-height: 1.5; color: var(--la-fg, var(--la-ink)); }
+body.lw-page .learnworlds-main-text-large      { font-size: clamp(calc(1.125 * var(--la-rem)), 1.5vw, calc(1.375 * var(--la-rem)))!important; line-height: 1.55; color: var(--la-fg, var(--la-ink)); }
+body.lw-page .learnworlds-main-text-normal     { font-size: clamp(calc(1 * var(--la-rem)), 1.05vw, calc(1.125 * var(--la-rem)))   !important; line-height: 1.65; }
+body.lw-page .learnworlds-main-text-small      { font-size: calc(0.9375 * var(--la-rem)) !important; line-height: 1.6; }
+body.lw-page .learnworlds-main-text-very-small { font-size: calc(0.8125 * var(--la-rem)) !important; line-height: 1.55; letter-spacing: 0.01em; }
 
 /* Body copy inside a text column gets a measure. Widgets sitting alone in a
    full-width column would otherwise run 140 characters on a desktop. */
@@ -390,9 +406,9 @@ body.lw-page .learnworlds-button {
 }
 body.lw-page .learnworlds-button:active { transform: scale(0.97); transition-duration: 100ms; }
 
-body.lw-page .learnworlds-button-large  { font-size: 0.8125rem !important; padding: 1.15rem 2.5rem !important; }
-body.lw-page .learnworlds-button-normal { font-size: 0.75rem   !important; padding: 0.95rem 2rem   !important; }
-body.lw-page .learnworlds-button-small  { font-size: 0.6875rem !important; padding: 0.75rem 1.5rem !important; }
+body.lw-page .learnworlds-button-large  { font-size: calc(0.8125 * var(--la-rem)) !important; padding: calc(1.15 * var(--la-rem)) calc(2.5 * var(--la-rem)) !important; }
+body.lw-page .learnworlds-button-normal { font-size: calc(0.75 * var(--la-rem))   !important; padding: calc(0.95 * var(--la-rem)) calc(2 * var(--la-rem))   !important; }
+body.lw-page .learnworlds-button-small  { font-size: calc(0.6875 * var(--la-rem)) !important; padding: calc(0.75 * var(--la-rem)) calc(1.5 * var(--la-rem)) !important; }
 
 /* Solid: ink on light surfaces, paper on dark ones — driven by the context
    tokens, so the same class is correct in both places. */
@@ -443,7 +459,7 @@ body.lw-page .lw-topbar-option-link.button-like,
 body.lw-page .lw-topbar-option-link.button-like .lw-topbar-option-link-lbl {
   font-family: var(--la-font-sans) !important;
   font-weight: 500 !important;
-  font-size: 0.6875rem !important;
+  font-size: calc(0.6875 * var(--la-rem)) !important;
   text-transform: uppercase !important;
   letter-spacing: 0.14em !important;
   text-decoration: none !important;
@@ -522,11 +538,23 @@ body.lw-page .learnworlds-divider {
 body.lw-page .lw-topbar {
   box-shadow: none !important;   /* the bar is a hairline, never a shadow */
 }
+/* LearnWorlds wraps the nav in `.lw-cols.lw-body-bg`, and lw-body-bg carries
+   the light tokens. On a dark bar that turned the labels ink-on-ink —
+   invisible on the live school until 29 Oct 2026. The bar's own background
+   decides the context, so re-assert dark inside a dark bar. */
+body.lw-page .lw-topbar.lw-brand-bg .lw-body-bg,
+body.lw-page .lw-topbar.lw-dark-bg .lw-body-bg {
+  --la-fg: var(--la-paper);
+  --la-bg: var(--la-ink);
+  --la-line: var(--la-line-on-dark);
+  --la-muted: var(--la-muted-on-dark);
+}
+/* px, not rem: the desktop root is 10px, so 0.75rem rendered a 7.5px label. */
 body.lw-page .lw-topbar-option-link:not(.button-like) .lw-topbar-option-link-lbl,
 body.lw-page .lw-topbar-option-link:not(.button-like) {
   text-decoration: none !important;
   font-family: var(--la-font-sans) !important;
-  font-size: 0.75rem !important;
+  font-size: 12px !important;
   font-weight: 500 !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
@@ -593,6 +621,35 @@ body.lw-page .lw-topbar-option-link:not(.button-like):active { opacity: 0.6; }
     padding: 14px 24px !important;
     margin-top: 12px !important;
   }
+
+  /* The panel a student actually sees. Current LearnWorlds builds the open
+     menu as a separate `.lw-topbar-hamburger-menu` list (.mobile-nav-menu),
+     not by unfolding .lw-topbar-menu-wrapper, so the rules above never
+     reached it: labels rendered at 9px on a phone (29 Oct 2026). */
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-menu-link,
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-menu-link > span {
+    font-family: var(--la-font-sans) !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
+    color: var(--la-paper) !important;
+    text-decoration: none !important;
+  }
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-menu-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px;
+    min-height: 44px !important;
+    padding: 10px 8px !important;
+  }
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-subMenu .mobile-nav-menu-link,
+  body.lw-page .lw-topbar-hamburger-menu .mobile-nav-subMenu .mobile-nav-menu-link > span {
+    font-size: 17px !important;
+    color: var(--la-muted-on-dark) !important;
+  }
 }
 /* The logo's square frame is never altered — only its box is spaced. */
 body.lw-page .lw-logo img { border-radius: 0 !important; }
@@ -612,7 +669,7 @@ body.lw-page .lw-footer a,
 body.lw-page .lw-footer-links a {
   color: var(--la-muted-on-dark) !important;
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: calc(0.875 * var(--la-rem));
   transition: color var(--la-dur) var(--la-ease);
 }
 @media (hover: hover) {
@@ -635,7 +692,7 @@ body.lw-page .lw-social-button {
 body.lw-page .cards-grandpa {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
-  gap: clamp(1.5rem, 3vw, 3rem);
+  gap: clamp(calc(1.5 * var(--la-rem)), 3vw, calc(3 * var(--la-rem)));
 }
 body.lw-page .cards-grandpa > * { width: 100% !important; margin: 0 !important; }
 
@@ -648,7 +705,7 @@ body.lw-page [class*="course-card"] {
   background: transparent !important;
   border: 0 !important;
   border-top: var(--la-hairline) solid var(--la-line-on-light) !important;
-  padding-top: 1.25rem !important;
+  padding-top: calc(1.25 * var(--la-rem)) !important;
 }
 
 /* ---- Progress ---------------------------------------------------------- */
@@ -656,7 +713,7 @@ body.lw-page .lw-progress-wrapper { background: var(--la-line-on-light) !importa
 body.lw-page .lw-progress { background: var(--la-ink) !important; border-radius: 0 !important; }
 
 /* ---- Load more / pagination -------------------------------------------- */
-body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.75rem; }
+body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter-spacing: 0.12em; text-transform: uppercase; font-size: calc(0.75 * var(--la-rem)); }
 
 /* ===== src/30-blocks.css ===== */
 /* =========================================================================
@@ -682,7 +739,7 @@ body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter
 .la-inner--narrow { max-width: 900px; }
 
 /* Section head: eyebrow, headline, optional lead. Used by most blocks. */
-.la-head { display: grid; gap: 1rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+.la-head { display: grid; gap: calc(1 * var(--la-rem)); margin-bottom: clamp(calc(2 * var(--la-rem)), 4vw, calc(3.5 * var(--la-rem))); }
 .la-head .la-body { margin: 0; }
 
 /* ---- 1. Hero ----------------------------------------------------------- */
@@ -717,9 +774,9 @@ body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter
   max-width: var(--la-content-max);
   margin-inline: auto;
   padding: var(--la-gutter);
-  padding-bottom: clamp(3rem, 7vw, 6rem);
+  padding-bottom: clamp(calc(3 * var(--la-rem)), 7vw, calc(6 * var(--la-rem)));
   display: grid;
-  gap: 1.5rem;
+  gap: calc(1.5 * var(--la-rem));
 }
 .la-hero__body .la-body { color: var(--la-muted-on-dark); }
 
@@ -732,24 +789,24 @@ body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter
   border-top: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
 }
 .la-stat {
-  padding: clamp(1.75rem, 3vw, 2.75rem) 0;
+  padding: clamp(calc(1.75 * var(--la-rem)), 3vw, calc(2.75 * var(--la-rem))) 0;
   border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
   display: grid;
-  gap: 0.5rem;
+  gap: calc(0.5 * var(--la-rem));
 }
-@media (width >= 48rem) {
-  .la-stat + .la-stat { border-left: var(--la-hairline) solid var(--la-line, var(--la-line-on-light)); padding-left: clamp(1.5rem, 3vw, 3rem); }
+@media (width >= calc(48 * var(--la-rem))) {
+  .la-stat + .la-stat { border-left: var(--la-hairline) solid var(--la-line, var(--la-line-on-light)); padding-left: clamp(calc(1.5 * var(--la-rem)), 3vw, calc(3 * var(--la-rem))); }
 }
 .la-stat__figure {
   font-family: var(--la-font-display);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(calc(2.5 * var(--la-rem)), 5vw, calc(4 * var(--la-rem)));
   line-height: 1;
   letter-spacing: -0.028em;
   font-variant-numeric: tabular-nums;   /* stops the layout jittering mid-count */
 }
-.la-stat__label { color: var(--la-muted, var(--la-muted-on-light)); font-size: 0.875rem; line-height: 1.45; max-width: 22ch; }
+.la-stat__label { color: var(--la-muted, var(--la-muted-on-light)); font-size: calc(0.875 * var(--la-rem)); line-height: 1.45; max-width: 22ch; }
 
 /* ---- 3. Journey spine -------------------------------------------------- */
 /* A numbered vertical sequence — enrol → train → assess → certify → work.
@@ -757,23 +814,23 @@ body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter
 .la-spine { display: grid; gap: 0; border-top: var(--la-hairline) solid var(--la-line, var(--la-line-on-light)); }
 .la-step {
   display: grid;
-  grid-template-columns: 4rem 1fr;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  padding-block: clamp(1.75rem, 3.5vw, 3rem);
+  grid-template-columns: calc(4 * var(--la-rem)) 1fr;
+  gap: clamp(calc(1 * var(--la-rem)), 3vw, calc(2.5 * var(--la-rem)));
+  padding-block: clamp(calc(1.75 * var(--la-rem)), 3.5vw, calc(3 * var(--la-rem)));
   border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
 }
-@media (width >= 64rem) { .la-step { grid-template-columns: 6rem minmax(0, 22ch) 1fr; } }
+@media (width >= calc(64 * var(--la-rem))) { .la-step { grid-template-columns: calc(6 * var(--la-rem)) minmax(0, 22ch) 1fr; } }
 .la-step__n {
   font-family: var(--la-font-sans);
-  font-size: 0.6875rem;
+  font-size: calc(0.6875 * var(--la-rem));
   font-weight: 500;
   letter-spacing: 0.18em;
   color: var(--la-muted, var(--la-muted-on-light));
   padding-top: 0.55em;
 }
-.la-step__title { font-family: var(--la-font-display); font-style: italic; font-size: clamp(1.35rem, 2.4vw, 1.875rem); line-height: 1.18; letter-spacing: -0.012em; }
+.la-step__title { font-family: var(--la-font-display); font-style: italic; font-size: clamp(calc(1.35 * var(--la-rem)), 2.4vw, calc(1.875 * var(--la-rem))); line-height: 1.18; letter-spacing: -0.012em; }
 .la-step__body { color: var(--la-muted, var(--la-muted-on-light)); line-height: 1.65; max-width: var(--la-measure); }
-@media (width < 64rem) { .la-step__body { grid-column: 2; } }
+@media (width < calc(64 * var(--la-rem))) { .la-step__body { grid-column: 2; } }
 
 /* ---- 4. Pull quote ----------------------------------------------------- */
 .la-quote { text-align: left; }
@@ -782,29 +839,29 @@ body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter
   font-family: var(--la-font-display);
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  font-size: clamp(calc(1.5 * var(--la-rem)), 3.4vw, calc(2.5 * var(--la-rem)));
   line-height: 1.24;
   letter-spacing: -0.018em;
   max-width: 24ch;
 }
-.la-quote figcaption { margin-top: 2rem; display: grid; gap: 0.25rem; }
-.la-quote cite { font-style: normal; font-size: 0.875rem; font-weight: 500; }
-.la-quote .la-quote__role { font-size: 0.8125rem; color: var(--la-muted, var(--la-muted-on-light)); }
+.la-quote figcaption { margin-top: calc(2 * var(--la-rem)); display: grid; gap: calc(0.25 * var(--la-rem)); }
+.la-quote cite { font-style: normal; font-size: calc(0.875 * var(--la-rem)); font-weight: 500; }
+.la-quote .la-quote__role { font-size: calc(0.8125 * var(--la-rem)); color: var(--la-muted, var(--la-muted-on-light)); }
 
 /* ---- 5. Editorial split ------------------------------------------------ */
 /* Image one side, text the other. Alternates with `.la-split--flip`. */
-.la-split { display: grid; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
-@media (width >= 64rem) {
+.la-split { display: grid; gap: clamp(calc(2 * var(--la-rem)), 5vw, calc(5 * var(--la-rem))); align-items: center; }
+@media (width >= calc(64 * var(--la-rem))) {
   .la-split { grid-template-columns: 1fr 1fr; }
   .la-split--flip .la-split__media { order: 2; }
 }
 .la-split__media { aspect-ratio: 4 / 5; background-size: cover; background-position: center; background-color: var(--la-stone); }
-.la-split__body { display: grid; gap: 1.25rem; }
+.la-split__body { display: grid; gap: calc(1.25 * var(--la-rem)); }
 
 /* ---- 6. CTA band ------------------------------------------------------- */
 .la-cta { background: var(--la-ink); color: var(--la-paper); --la-fg: var(--la-paper); --la-bg: var(--la-ink); --la-muted: var(--la-muted-on-dark); --la-line: var(--la-line-on-dark); }
-.la-cta__inner { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
-@media (width >= 64rem) { .la-cta__inner { grid-template-columns: 1fr auto; align-items: end; } }
+.la-cta__inner { display: grid; gap: clamp(calc(1.5 * var(--la-rem)), 3vw, calc(2.5 * var(--la-rem))); }
+@media (width >= calc(64 * var(--la-rem))) { .la-cta__inner { grid-template-columns: 1fr auto; align-items: end; } }
 
 /* ---- 7. Accreditation strip -------------------------------------------- */
 /* Text-only by rule: no third-party logos are used anywhere on this site,
@@ -812,13 +869,13 @@ body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter
 .la-accred {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(1rem, 4vw, 3.5rem);
+  gap: clamp(calc(1 * var(--la-rem)), 4vw, calc(3.5 * var(--la-rem)));
   align-items: center;
   justify-content: center;
-  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  padding-block: clamp(calc(1.5 * var(--la-rem)), 3vw, calc(2.5 * var(--la-rem)));
   border-block: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
 }
-.la-accred span { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--la-muted, var(--la-muted-on-light)); }
+.la-accred span { font-size: calc(0.6875 * var(--la-rem)); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--la-muted, var(--la-muted-on-light)); }
 
 /* ---- 8. Course index --------------------------------------------------- */
 /* A hairline list, not a card deck. Reads like a prospectus contents page. */
@@ -826,33 +883,33 @@ body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter
 .la-index__row {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 1rem clamp(1rem, 3vw, 3rem);
+  gap: calc(1 * var(--la-rem)) clamp(calc(1 * var(--la-rem)), 3vw, calc(3 * var(--la-rem)));
   align-items: baseline;
-  padding-block: clamp(1.25rem, 2.5vw, 2rem);
+  padding-block: clamp(calc(1.25 * var(--la-rem)), 2.5vw, calc(2 * var(--la-rem)));
   border-bottom: var(--la-hairline) solid var(--la-line, var(--la-line-on-light));
   text-decoration: none;
   color: inherit;
 }
-@media (width >= 64rem) { .la-index__row { grid-template-columns: 10rem 1fr 12rem auto; } }
-.la-index__cat { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--la-muted, var(--la-muted-on-light)); }
-.la-index__name { font-family: var(--la-font-display); font-style: italic; font-size: clamp(1.25rem, 2vw, 1.625rem); letter-spacing: -0.012em; line-height: 1.2; }
-.la-index__meta { font-size: 0.875rem; color: var(--la-muted, var(--la-muted-on-light)); }
-.la-index__go { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap; }
+@media (width >= calc(64 * var(--la-rem))) { .la-index__row { grid-template-columns: calc(10 * var(--la-rem)) 1fr calc(12 * var(--la-rem)) auto; } }
+.la-index__cat { font-size: calc(0.6875 * var(--la-rem)); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--la-muted, var(--la-muted-on-light)); }
+.la-index__name { font-family: var(--la-font-display); font-style: italic; font-size: clamp(calc(1.25 * var(--la-rem)), 2vw, calc(1.625 * var(--la-rem))); letter-spacing: -0.012em; line-height: 1.2; }
+.la-index__meta { font-size: calc(0.875 * var(--la-rem)); color: var(--la-muted, var(--la-muted-on-light)); }
+.la-index__go { font-size: calc(0.6875 * var(--la-rem)); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap; }
 @media (hover: hover) {
   .la-index__row { transition: background-color var(--la-dur) var(--la-ease), padding-inline var(--la-dur) var(--la-ease); }
-  .la-index__row:hover { background: var(--la-stone); padding-inline: 1rem; }
+  .la-index__row:hover { background: var(--la-stone); padding-inline: calc(1 * var(--la-rem)); }
 }
 
 /* ---- Shared: button in block markup ------------------------------------ */
 .la-btn {
   display: inline-block;
   font-family: var(--la-font-sans);
-  font-size: 0.75rem;
+  font-size: calc(0.75 * var(--la-rem));
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0.95rem 2rem;
+  padding: calc(0.95 * var(--la-rem)) calc(2 * var(--la-rem));
   border: var(--la-hairline) solid var(--la-fg, var(--la-ink));
   background: var(--la-fg, var(--la-ink));
   color: var(--la-bg, var(--la-paper));
@@ -924,6 +981,25 @@ body.slug-people .profile-card,
 body.slug-profile .profile-card { border-radius: 0 !important; }
 body[class*="slug-"] .profile-avatar { border-radius: 50% !important; }  /* faces stay round */
 
+/* ---- After-login dashboard (/start) ------------------------------------ */
+/* The stats row ends in a Messages tile whose column is set to the "body"
+   background, which this template paints white: a white block breaking a
+   row of quiet numbers. On a dark section it becomes a hairline tile that
+   reads as the inbox link it is. */
+body.slug-start .lw-dark-bg .col.lw-body-bg,
+body.slug-start .lw-brand-bg .col.lw-body-bg,
+body.slug-start .la-ink .col.lw-body-bg {
+  background-color: transparent !important;
+  border: var(--la-hairline) solid var(--la-line-on-dark) !important;
+  --la-fg: var(--la-paper);
+  --la-muted: var(--la-muted-on-dark);
+  color: var(--la-paper) !important;
+}
+body.slug-start .lw-brand-bg .col.lw-body-bg .learnworlds-overline-text,
+body.slug-start .lw-dark-bg .col.lw-body-bg .learnworlds-overline-text {
+  color: var(--la-paper) !important;
+}
+
 /* ---- Course player ---------------------------------------------------- */
 /* The player is a reading surface, not a marketing page: type gets a real
    measure and the chrome recedes. Kept conservative on purpose — breaking
@@ -945,6 +1021,6 @@ body.course-player {
    slots, so this block must ALSO be pasted into
    Site custom code → <style> Dynamic (css). It is duplicated here so the
    preview harness renders it too. */
-.-form-create-forgot .learnworlds-main-text-very-small { font-size: 0.8125rem; letter-spacing: 0.01em; }
+.-form-create-forgot .learnworlds-main-text-very-small { font-size: calc(0.8125 * var(--la-rem)); letter-spacing: 0.01em; }
 .-form-create-forgot .-login-small-but { padding-right: 10px; }
 

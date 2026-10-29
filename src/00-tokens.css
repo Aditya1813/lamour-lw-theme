@@ -26,6 +26,14 @@
   --la-font-sans: "General Sans", "General Sans Fallback",
     -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
+  /* -- the rem the design was drawn in --
+     The site's scale assumes a 16px root. LearnWorlds sets the root to
+     10px on desktop and 8px on phones, which drew every rem here at
+     62% / 50% size. build.sh rewrites each `Nrem` in dist/ as
+     calc(N * var(--la-rem)), so the source keeps the site's numbers and
+     the school renders them at the size they were designed. */
+  --la-rem: 16px;
+
   /* -- editorial spacing rhythm --
      Fluid by design. Do not swap these for fixed px to "tighten density";
      the generous whitespace is the layout, not decoration. */
