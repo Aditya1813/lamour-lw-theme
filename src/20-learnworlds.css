@@ -462,9 +462,7 @@ body.lw-page .lw-social-button {
 /* The closing band lamour.js appends: KHDA line, then the site's large
    Sentient wordmark with a single slow sheen (FooterWordmark.tsx). */
 body.lw-page .la-footer-band {
-  max-width: var(--la-content-max);
-  margin: clamp(2.5rem, 6vw, 5rem) auto 0;
-  padding: 0 var(--la-gutter);
+  margin: clamp(2.5rem, 6vw, 5rem) 0 0;
   border-top: var(--la-hairline) solid var(--la-line-on-dark);
 }
 body.lw-page .la-footer-khda {

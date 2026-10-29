@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1226
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1227
     Source: ~/dev/lamour-lw-theme/src — edit there, never edit dist/.
     Design system of record: ~/dev/lamour-website/src/app/globals.css */
 
@@ -764,9 +764,7 @@ body.lw-page .lw-social-button {
 /* The closing band lamour.js appends: KHDA line, then the site's large
    Sentient wordmark with a single slow sheen (FooterWordmark.tsx). */
 body.lw-page .la-footer-band {
-  max-width: var(--la-content-max);
-  margin: clamp(calc(2.5 * var(--la-rem)), 6vw, calc(5 * var(--la-rem))) auto 0;
-  padding: 0 var(--la-gutter);
+  margin: clamp(calc(2.5 * var(--la-rem)), 6vw, calc(5 * var(--la-rem))) 0 0;
   border-top: var(--la-hairline) solid var(--la-line-on-dark);
 }
 body.lw-page .la-footer-khda {

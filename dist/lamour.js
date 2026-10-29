@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1226 */
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1227 */
 /* =========================================================================
    lamour.js — progressive enhancement for the L'Amour LearnWorlds theme.
 
@@ -94,7 +94,8 @@
     band.innerHTML =
       '<p class="la-footer-khda">This institution is approved and permitted by KHDA.</p>' +
       '<p class="la-footer-wordmark" aria-hidden="true">L’Amour Institute</p>';
-    footer.appendChild(band);
+    /* Inside the footer's content column so it lines up with the links. */
+    (footer.querySelector(".learnworlds-section-content") || footer).appendChild(band);
   }
 
   /* ---- Stat counters ---------------------------------------------------
