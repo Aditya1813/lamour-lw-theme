@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1242 */
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1243 */
 /* =========================================================================
    lamour.js — progressive enhancement for the L'Amour LearnWorlds theme.
 
@@ -437,10 +437,12 @@
   function isDark(sec) {
     return /\b(lw-dark-bg|lw-brand-bg|la-ink)\b/.test(sec.className);
   }
+  /* Every section carries an overlay div, so only a real background
+     picture or video counts as "this section has its own photograph". */
   function hasPhoto(sec) {
-    var bg = sec.style && sec.style.backgroundImage;
+    var bg = getComputedStyle(sec).backgroundImage;
     if (bg && bg !== "none") return true;
-    return !!sec.querySelector(":scope > .learnworlds-section-overlay, :scope > .js-section-bg-image");
+    return !!sec.querySelector(":scope > .js-video-wrapper video, :scope > .js-video-wrapper iframe");
   }
 
   function attach(sec, dim, motes) {
@@ -451,7 +453,8 @@
     var inner = document.createElement("div");
     inner.className = "la-silk-sticky";
     host.appendChild(inner);
-    sec.insertBefore(host, sec.firstChild);
+    /* After the overlay (a veil meant for photos), before the content. */
+    sec.insertBefore(host, sec.querySelector(":scope > .learnworlds-section-content") || sec.firstChild);
     sec.classList.add("la-has-silk");
     var s = { host: inner, dim: dim, motes: motes, near: false, visible: false, gl: null, canvas: null, u: {}, cssW: 0, cssH: 0, stale: true };
     surfaces.push(s);

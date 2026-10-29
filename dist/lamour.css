@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1242
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1243
     Source: ~/dev/lamour-lw-theme/src — edit there, never edit dist/.
     Design system of record: ~/dev/lamour-website/src/app/globals.css */
 
@@ -423,14 +423,16 @@ body.lw-page [class*="learnworlds-heading"] > div:last-child:has(> br:only-child
    the kicker introduces a heading, not on stat labels. */
 body.lw-page .learnworlds-overline-text {
   font-family: var(--la-font-sans) !important;
+}
+/* Kicker typography only on a real kicker: the same class is LearnWorlds'
+   stat label ("CERTIFICATES"), where 0.24em tracking overflowed a phone. */
+body.lw-page .learnworlds-overline-text:has(+ [class*="learnworlds-heading"]),
+body.lw-page .learnworlds-overline-text.la-kicker {
   font-weight: 600 !important;
   letter-spacing: 0.24em !important;
   text-transform: uppercase !important;
   font-size: calc(0.75 * var(--la-rem)) !important;
   line-height: 1.2 !important;
-}
-body.lw-page .lw-widget-in.learnworlds-overline-text:has(+ [class*="learnworlds-heading"]),
-body.lw-page .learnworlds-overline-text.la-kicker {
   opacity: 0.66;
 }
 body.lw-page .learnworlds-overline-text:has(+ [class*="learnworlds-heading"])::before,
