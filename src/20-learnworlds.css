@@ -557,10 +557,12 @@ body.lw-page .la-has-silk > .la-footer-band { position: relative; z-index: 1; }
    adds .la-sheen), the same light that crosses the silk's folds. Runs once. */
 body.lw-page .la-sheen {
   color: transparent !important;
+  /* Rests at 88% white so the passing light has somewhere to go (the site's
+     wordmark does the same at 92%). */
   background-image: linear-gradient(100deg,
-    var(--la-paper) 0%, var(--la-paper) 40%,
-    #f5e6cc 47%, #fff 50%, #f5e6cc 53%,
-    var(--la-paper) 60%, var(--la-paper) 100%);
+    rgb(255 255 255 / 88%) 0%, rgb(255 255 255 / 88%) 38%,
+    #f1dcb6 46%, #fff 50%, #f1dcb6 54%,
+    rgb(255 255 255 / 88%) 62%, rgb(255 255 255 / 88%) 100%);
   background-size: 260% 100%;
   background-position: 100% 0;
   -webkit-background-clip: text;
