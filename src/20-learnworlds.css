@@ -71,6 +71,11 @@ body.lw-page [class*="lw-brand-bg-fadeout"]:not(.lw-brand-bg-fadeout60) {
   background-color: color-mix(in srgb, var(--la-fg, var(--la-ink)) 6%, transparent) !important;
 }
 
+/* The "screen" picture frame borrows the brand slate for its thick border. */
+body.lw-page .learnworlds-screen-wrapper {
+  border-color: color-mix(in srgb, var(--la-fg, var(--la-ink)) 8%, transparent) !important;
+}
+
 body.lw-page .lw-brand-text        { color: currentColor !important; }
 body.lw-page .lw-light-bg          { background-color: var(--la-stone) !important; }
 body.lw-page .lw-light-text        { color: var(--la-paper) !important; }

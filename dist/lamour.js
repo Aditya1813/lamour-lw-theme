@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1227 */
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1228 */
 /* =========================================================================
    lamour.js — progressive enhancement for the L'Amour LearnWorlds theme.
 

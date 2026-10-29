@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1227
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1228
     Source: ~/dev/lamour-lw-theme/src — edit there, never edit dist/.
     Design system of record: ~/dev/lamour-website/src/app/globals.css */
 
@@ -371,6 +371,11 @@ body.lw-page .lw-brand-accent2-bg { background-color: var(--la-ink) !important; 
    dark sections and darker on light ones. fadeout60 stays the photo veil. */
 body.lw-page [class*="lw-brand-bg-fadeout"]:not(.lw-brand-bg-fadeout60) {
   background-color: color-mix(in srgb, var(--la-fg, var(--la-ink)) 6%, transparent) !important;
+}
+
+/* The "screen" picture frame borrows the brand slate for its thick border. */
+body.lw-page .learnworlds-screen-wrapper {
+  border-color: color-mix(in srgb, var(--la-fg, var(--la-ink)) 8%, transparent) !important;
 }
 
 body.lw-page .lw-brand-text        { color: currentColor !important; }
