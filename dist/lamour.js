@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1243 */
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1315 */
 /* =========================================================================
    lamour.js — progressive enhancement for the L'Amour LearnWorlds theme.
 
@@ -466,8 +466,15 @@
       .filter(function (sec) { return !sec.classList.contains("lw-topbar") && !sec.closest(".lw-topbar"); });
     var hero = sections.filter(function (sec) { return !sec.classList.contains("lw-footer"); })[0];
     if (hero && isDark(hero) && !hasPhoto(hero)) attach(hero, 0.55, 1);
+    if (hero && hero.classList.contains("la-has-silk")) {
+      var h = hero.querySelector("[class*='learnworlds-heading']");
+      if (h) h.classList.add("la-sheen");   /* one sheen per page, on the hero's heading */
+    }
     sections.forEach(function (sec) {
       if (sec.classList.contains("la-silk") && !hasPhoto(sec)) attach(sec, 0.55, 1);
+      /* Stat boxes (a row of faded-tint tiles): silk shows through the 6% wash. */
+      else if (sec !== hero && isDark(sec) && !hasPhoto(sec) &&
+               sec.querySelectorAll("[class*='lw-brand-bg-fadeout']").length >= 2) attach(sec, 0.5, 0.8);
       else if (sec.classList.contains("lw-footer")) attach(sec, 0.42, 0.6);   /* quieter: links sit on it */
     });
   }

@@ -552,3 +552,22 @@ body.lw-page .la-silk-host {
 body.lw-page .la-silk-sticky { position: sticky; top: 0; width: 100%; height: min(100lvh, 100%); }
 body.lw-page .la-has-silk > .learnworlds-section-content,
 body.lw-page .la-has-silk > .la-footer-band { position: relative; z-index: 1; }
+
+/* One slow champagne sheen across the hero heading on a silk hero (silk.js
+   adds .la-sheen), the same light that crosses the silk's folds. Runs once. */
+body.lw-page .la-sheen {
+  color: transparent !important;
+  background-image: linear-gradient(100deg,
+    var(--la-paper) 0%, var(--la-paper) 40%,
+    #f5e6cc 47%, #fff 50%, #f5e6cc 53%,
+    var(--la-paper) 60%, var(--la-paper) 100%);
+  background-size: 260% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  padding-bottom: 0.08em;   /* the clip would shave Sentient's descenders */
+  animation: la-sheen 3.2s var(--la-ease) 1s 1 both;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.lw-page .la-sheen { animation: none; background-position: 0 0; }
+}
