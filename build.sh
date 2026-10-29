@@ -25,6 +25,8 @@ mkdir -p dist
 {
   echo "/*! L'Amour LearnWorlds theme — build $VERSION */"
   cat src/lamour.js
+  echo
+  cat src/silk.js
 } > dist/lamour.js
 
 # LearnWorlds' root font-size is 10px (8px on phones), not the 16px the

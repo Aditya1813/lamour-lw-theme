@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1228
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1242
     Source: ~/dev/lamour-lw-theme/src — edit there, never edit dist/.
     Design system of record: ~/dev/lamour-website/src/app/globals.css */
 
@@ -835,6 +835,23 @@ body.lw-page .lw-progress { background: var(--la-ink) !important; border-radius:
 
 /* ---- Load more / pagination -------------------------------------------- */
 body.lw-page .lw-load-more { font-family: var(--la-font-sans) !important; letter-spacing: 0.12em; text-transform: uppercase; font-size: calc(0.75 * var(--la-rem)); }
+
+/* ---- Silk (silk.js) ------------------------------------------------------
+   The site's black silk behind the hero, the footer and any section given
+   the class `la-silk` in the builder. The canvas is sticky and never taller
+   than the viewport, so a long section still renders one screen of silk.
+   The section keeps its own ink underneath as the fallback. */
+body.lw-page .la-has-silk { position: relative; isolation: isolate; }
+body.lw-page .la-silk-host {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: clip;
+}
+body.lw-page .la-silk-sticky { position: sticky; top: 0; width: 100%; height: min(100lvh, 100%); }
+body.lw-page .la-has-silk > .learnworlds-section-content,
+body.lw-page .la-has-silk > .la-footer-band { position: relative; z-index: 1; }
 
 /* ===== src/30-blocks.css ===== */
 /* =========================================================================
