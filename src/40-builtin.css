@@ -43,6 +43,37 @@ body[class*="slug-"] [class*="-box"] {
   border: var(--la-hairline) solid var(--la-line-on-light) !important;
 }
 
+/* Built-in pages don't get body.lw-page, so the top bar kept the template's
+   slate (Community, 29 Oct 2026). Same bar as every other page: ink, paper
+   labels, 12px tracked. */
+body[class*="slug-"]:not(.lw-page):not(.slug-path-player) .lw-topbar.lw-brand-bg,
+body[class*="slug-"]:not(.lw-page):not(.slug-path-player) .lw-topbar .lw-h-row,
+body[class*="slug-"]:not(.lw-page):not(.slug-path-player) .lw-topbar-hamburger-menu {
+  background-color: var(--la-ink) !important;
+  box-shadow: none !important;
+}
+body[class*="slug-"]:not(.lw-page):not(.slug-path-player) .lw-topbar-option-link:not(.button-like),
+body[class*="slug-"]:not(.lw-page):not(.slug-path-player) .lw-topbar-option-link:not(.button-like) .lw-topbar-option-link-lbl {
+  font-family: var(--la-font-sans) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  color: var(--la-paper) !important;
+}
+@media (max-width: 990px) {
+  body[class*="slug-"]:not(.lw-page):not(.slug-path-player) .lw-topbar-hamburger-menu .mobile-nav-menu-link,
+  body[class*="slug-"]:not(.lw-page):not(.slug-path-player) .lw-topbar-hamburger-menu .mobile-nav-menu-link > span {
+    font-family: var(--la-font-sans) !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: var(--la-paper) !important;
+  }
+}
+
 /* ---- Account -------------------------------------------------------- */
 body.slug-account #coursesTaken { background-color: var(--la-paper); }
 

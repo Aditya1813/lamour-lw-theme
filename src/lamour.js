@@ -43,6 +43,59 @@
     });
   }
 
+  /* ---- Entrance motion on LearnWorlds' own widgets ----------------------
+     Builder widgets don't carry data-la-reveal, so nothing moved. Tag them
+     here with the site's vocabulary: headings rise, kickers kick, pictures
+     settle, copy and buttons come up. Order within a section sets --la-i.
+     Top bar, footer and anything already on screen at load stay put — a
+     page that animates its own header reads as slow, not alive. */
+  var AUTO = [
+    ["[class*='learnworlds-heading']", "rise"],
+    [".learnworlds-overline-text", "kick"],
+    [".learnworlds-screen-wrapper, .learnworlds-image-wrapper", "settle"],
+    [".learnworlds-main-text, .learnworlds-button-wrapper", ""]
+  ];
+  function initAutoReveal(root) {
+    if (!SUPPORTED || REDUCED || !document.body.classList.contains("lw-page")) return;
+    var fold = window.innerHeight * 0.85;
+    root.querySelectorAll(".learnworlds-section:not(.lw-topbar):not([data-la-auto])").forEach(function (sec) {
+      if (sec.closest(".lw-topbar, .lw-footer")) return;
+      sec.setAttribute("data-la-auto", "1");
+      var i = 0;
+      sec.querySelectorAll(AUTO.map(function (a) { return a[0]; }).join(",")).forEach(function (el) {
+        if (el.hasAttribute("data-la-reveal") || el.closest("[data-la-reveal]")) return;
+        if (el.getBoundingClientRect().top < fold && window.scrollY < 10) return;
+        var kind = "";
+        for (var k = 0; k < AUTO.length; k++) { if (el.matches(AUTO[k][0])) { kind = AUTO[k][1]; break; } }
+        el.setAttribute("data-la-reveal", kind);
+        el.style.setProperty("--la-i", Math.min(i++, 6));
+      });
+    });
+  }
+
+  /* A kicker that introduces a heading gets the site's hairline rule. */
+  function initKickers(root) {
+    root.querySelectorAll(".learnworlds-overline-text:not(.la-kicker)").forEach(function (el) {
+      var next = el.nextElementSibling;
+      if (next && /learnworlds-heading/.test(next.className)) el.classList.add("la-kicker");
+    });
+  }
+
+  /* ---- Footer: the site's closing band ----------------------------------
+     The site ends every page with the KHDA line and a large Sentient
+     wordmark. Added once, after LearnWorlds' own footer content. The KHDA
+     sentence is KHDA's prescribed wording, verbatim — never paraphrase it. */
+  function initFooterBand() {
+    var footer = document.querySelector(".lw-footer");
+    if (!footer || footer.querySelector(".la-footer-band")) return;
+    var band = document.createElement("div");
+    band.className = "la-footer-band";
+    band.innerHTML =
+      '<p class="la-footer-khda">This institution is approved and permitted by KHDA.</p>' +
+      '<p class="la-footer-wordmark" aria-hidden="true">L’Amour Institute</p>';
+    footer.appendChild(band);
+  }
+
   /* ---- Stat counters ---------------------------------------------------
      <span data-la-count="159" data-la-suffix="h">159h</span>
      Counts once on entry. The element keeps its literal text as the final
@@ -110,6 +163,8 @@
 
   function init(root) {
     root = root || document;
+    initKickers(root);
+    initAutoReveal(root);
     initReveal(root);
     initCounters(root);
     initPressable(root);
@@ -118,6 +173,7 @@
   function boot() {
     init(document);
     initNavState();
+    initFooterBand();
   }
 
   if (document.readyState === "loading") {
@@ -136,5 +192,5 @@
     }).observe(document.body || document.documentElement, { childList: true, subtree: true });
   }
 
-  window.LAmourTheme = { init: init, version: "1.0.0" };
+  window.LAmourTheme = { init: init, version: "1.1.0" };
 })();

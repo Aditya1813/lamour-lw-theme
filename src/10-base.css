@@ -150,6 +150,45 @@ body.lw-page :focus-visible {
 /* Stagger children of a revealed group without writing per-item delays. */
 .la-js [data-la-reveal-group] > * { transition-delay: calc(var(--la-i, 0) * 70ms); }
 
+/* The site's entrance vocabulary, applied by lamour.js to LearnWorlds' own
+   widgets (data-la-reveal="rise|kick|settle"; plain = up). One section's
+   pieces follow each other 90ms apart via --la-i.
+   rise   — headings come up out of a mask (site: .rise, 1.15s)
+   kick   — kickers slide in 16px, their hairline draws first (site: .kick/.grow)
+   settle — pictures open from the bottom and settle from 1.08 (site: .blind/.settle) */
+.la-js [data-la-reveal] { transition-delay: calc(var(--la-i, 0) * 90ms); }
+.la-js [data-la-reveal="rise"] {
+  transform: translateY(0.45em);
+  clip-path: inset(0 0 100% 0);
+  transition:
+    opacity 900ms var(--la-ease),
+    transform 1150ms var(--la-ease),
+    clip-path 1150ms var(--la-ease);
+  transition-delay: calc(var(--la-i, 0) * 90ms);
+}
+.la-js [data-la-reveal="rise"].is-revealed { clip-path: inset(-0.2em -0.2em -0.3em -0.2em); }
+.la-js [data-la-reveal="kick"] { transform: translateX(-16px); }
+.la-js [data-la-reveal="kick"]::before { transform: scaleX(0); transition: transform 800ms var(--la-ease); transition-delay: inherit; }
+.la-js [data-la-reveal="kick"].is-revealed::before { transform: scaleX(1); }
+.la-js [data-la-reveal="settle"] {
+  opacity: 1;
+  transform: translateY(40px);
+  clip-path: inset(100% 0 0 0);
+  transition:
+    transform 1200ms var(--la-ease),
+    clip-path 1200ms var(--la-ease);
+  transition-delay: calc(var(--la-i, 0) * 90ms);
+}
+.la-js [data-la-reveal="settle"].is-revealed { clip-path: inset(0); }
+.la-js [data-la-reveal="settle"] > .js-screen-image-wrapper,
+.la-js [data-la-reveal="settle"] img {
+  transform: scale(1.08);
+  transition: transform 1600ms var(--la-ease);
+  transition-delay: inherit;
+}
+.la-js [data-la-reveal="settle"].is-revealed > .js-screen-image-wrapper,
+.la-js [data-la-reveal="settle"].is-revealed img { transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
   /* Reduced motion means a gentler equivalent, not no feedback. */
   .la-pressable:active,
