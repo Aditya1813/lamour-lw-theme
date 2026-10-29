@@ -1,4 +1,4 @@
-/*! L'Amour LearnWorlds theme — build 2026.10.29.1157
+/*! L'Amour LearnWorlds theme — build 2026.10.29.1201
     Source: ~/dev/lamour-lw-theme/src — edit there, never edit dist/.
     Design system of record: ~/dev/lamour-website/src/app/globals.css */
 
@@ -323,6 +323,14 @@ body.lw-page .lw-brand-bg-fadeout60 {
 body.lw-page .lw-brand-bg,
 body.lw-page .lw-brand-accent1-bg,
 body.lw-page .lw-brand-accent2-bg { background-color: var(--la-ink) !important; }
+
+/* The faded brand tints (fadeout05…fadeout90) kept the template's slate
+   blue — the course stat boxes and photo frames, 29 Oct 2026. They become
+   a faint wash of the section's own foreground, so a tint reads lighter on
+   dark sections and darker on light ones. fadeout60 stays the photo veil. */
+body.lw-page [class*="lw-brand-bg-fadeout"]:not(.lw-brand-bg-fadeout60) {
+  background-color: color-mix(in srgb, var(--la-fg, var(--la-ink)) 6%, transparent) !important;
+}
 
 body.lw-page .lw-brand-text        { color: currentColor !important; }
 body.lw-page .lw-light-bg          { background-color: var(--la-stone) !important; }
@@ -1014,6 +1022,40 @@ body.course-player {
 .lw-course-player h3 {
   font-family: var(--la-font-display) !important;
   font-style: italic !important;
+}
+
+/* The player's top bar shipped as the stock light-grey strip with 15px
+   lowercase "previous / next" and the theme's slate `clr1` on the sidebar
+   button. Colour and type only — sizes and layout stay LearnWorlds'. */
+body.slug-path-player .-default-course-player-topbar {
+  background-color: var(--la-ink) !important;
+  border-bottom: var(--la-hairline) solid var(--la-line-on-dark) !important;
+}
+body.slug-path-player .default-course-player-nav-btn,
+body.slug-path-player .default-course-player-nav-btn-lbl {
+  color: var(--la-paper) !important;
+  border-color: transparent !important;
+  font-family: var(--la-font-sans) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+body.slug-path-player .default-course-player-nav-btn [class*="icon"],
+body.slug-path-player .default-course-player-nav-btn i,
+body.slug-path-player .default-course-player-nav-btn svg {
+  color: var(--la-paper) !important;
+  fill: currentColor;
+}
+@media (hover: hover) {
+  body.slug-path-player .default-course-player-nav-btn:hover,
+  body.slug-path-player .default-course-player-nav-btn:hover .default-course-player-nav-btn-lbl {
+    color: var(--la-paper) !important;
+    opacity: 0.6;
+  }
+}
+body.slug-path-player .clr1-bg {
+  background-color: var(--la-ink) !important;
 }
 
 /* ---- Sign in / sign up forms ------------------------------------------

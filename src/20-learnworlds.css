@@ -63,6 +63,14 @@ body.lw-page .lw-brand-bg,
 body.lw-page .lw-brand-accent1-bg,
 body.lw-page .lw-brand-accent2-bg { background-color: var(--la-ink) !important; }
 
+/* The faded brand tints (fadeout05…fadeout90) kept the template's slate
+   blue — the course stat boxes and photo frames, 29 Oct 2026. They become
+   a faint wash of the section's own foreground, so a tint reads lighter on
+   dark sections and darker on light ones. fadeout60 stays the photo veil. */
+body.lw-page [class*="lw-brand-bg-fadeout"]:not(.lw-brand-bg-fadeout60) {
+  background-color: color-mix(in srgb, var(--la-fg, var(--la-ink)) 6%, transparent) !important;
+}
+
 body.lw-page .lw-brand-text        { color: currentColor !important; }
 body.lw-page .lw-light-bg          { background-color: var(--la-stone) !important; }
 body.lw-page .lw-light-text        { color: var(--la-paper) !important; }

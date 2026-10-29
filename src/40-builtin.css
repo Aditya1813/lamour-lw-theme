@@ -89,6 +89,40 @@ body.course-player {
   font-style: italic !important;
 }
 
+/* The player's top bar shipped as the stock light-grey strip with 15px
+   lowercase "previous / next" and the theme's slate `clr1` on the sidebar
+   button. Colour and type only — sizes and layout stay LearnWorlds'. */
+body.slug-path-player .-default-course-player-topbar {
+  background-color: var(--la-ink) !important;
+  border-bottom: var(--la-hairline) solid var(--la-line-on-dark) !important;
+}
+body.slug-path-player .default-course-player-nav-btn,
+body.slug-path-player .default-course-player-nav-btn-lbl {
+  color: var(--la-paper) !important;
+  border-color: transparent !important;
+  font-family: var(--la-font-sans) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+body.slug-path-player .default-course-player-nav-btn [class*="icon"],
+body.slug-path-player .default-course-player-nav-btn i,
+body.slug-path-player .default-course-player-nav-btn svg {
+  color: var(--la-paper) !important;
+  fill: currentColor;
+}
+@media (hover: hover) {
+  body.slug-path-player .default-course-player-nav-btn:hover,
+  body.slug-path-player .default-course-player-nav-btn:hover .default-course-player-nav-btn-lbl {
+    color: var(--la-paper) !important;
+    opacity: 0.6;
+  }
+}
+body.slug-path-player .clr1-bg {
+  background-color: var(--la-ink) !important;
+}
+
 /* ---- Sign in / sign up forms ------------------------------------------
    These render through LearnWorlds' Dynamic CSS slot rather than the page
    slots, so this block must ALSO be pasted into
